@@ -6,7 +6,6 @@ from io import BytesIO
 from django.shortcuts import render
 import requests
 
-
 def generateImage(request):
     if request.method == 'POST':
         api_key = "SG_8205d40045f77812"
@@ -44,7 +43,7 @@ def generateImage(request):
                 'imagem_base64': imagem_base64,
             }
 
-            return render(request, 'result.html', context)
+            return render(request, 'generate_image.html', context)
 
     return render(request, 'generate_image.html')
 
