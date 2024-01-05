@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerar imagem</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <section id="container">
+        <div id="form">
+            <h1>Teste</h1>
+            <form method="post">
+                 {% csrf_token %}
+                <input type="text" name="user_prompt" placeholder="Insira sua frase">
+                <button type="submit">Gerar Imagem</button>
+            </form>
+        </div>
+        <div id="blacksmith">
+            <h1>Happy New Year</h1>
+        </div>
+    </section>
+</body>
+</html>
