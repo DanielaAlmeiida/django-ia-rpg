@@ -11,11 +11,19 @@ def generateImage(request):
         api_key = "SG_8205d40045f77812"
         url = "https://api.segmind.com/v1/sdxl1.0-samaritan-3d"
 
-        prompt = request.POST.get('user_prompt')
+        weapon_type = request.POST.get('weapon-type')
+        weapon_name = request.POST.get('weapon-name')
+        weapon_color = request.POST.get('weapon-color')
+        weapon_aura = request.POST.get('weapon-aura')
+        weapon_description = request.POST.get('weapon-description')
+
+        prompt = (f"Craft a {weapon_color} {weapon_type} named '{weapon_name}' imbued with an aura of {weapon_aura}. "
+                  f"Description: '{weapon_description}'")
 
         data = {
           "prompt": prompt,
-          "negative_prompt": "drawing, painting, crayon, sketch, graphite, impressionist, noisy, blurry, soft, deformed, ugly. young. long neck. (cross eyed:1.5). multiple characters",
+          "negative_prompt": "drawing, painting, crayon, sketch, graphite, impressionist, noisy, blurry, soft, "
+                             "deformed, ugly. young. long neck. (cross eyed:1.5). multiple characters",
           "samples": 1,
           "scheduler": "Euler a",
           "num_inference_steps": 25,
@@ -47,41 +55,3 @@ def generateImage(request):
 
     return render(request, 'generate_image.html')
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#----------------------------------------------------------------------------
-
-""" BASIC
-from segmind import Kadinsky
-
-api_key = "SG_8205d40045f77812"
-model = Kadinsky(api_key)
-img = model.generate("Dog with broccoli.")
-img.show()
-"""

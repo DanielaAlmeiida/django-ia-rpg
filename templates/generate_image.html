@@ -1,26 +1,43 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Gerar imagem</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <title>Weapon Forge</title>
 </head>
 <body>
-    <section id="container">
+    <section id="container" class="box">
         <div id="form">
-            <h1>Teste</h1>
-            <form method="post">
+            <h1>Test</h1>
+            <form method="post" class="form-forge">
                  {% csrf_token %}
-                <input type="text" name="user_prompt" placeholder="Insira sua frase">
-                <button type="submit">Gerar Imagem</button>
+                <select id="weapon-type" name="weapon-type">
+                    <option value="sword">Sword</option>
+                    <option value="bowl">Bowl</option>
+                    <option value="staff">Staff</option>
+                    <option value="axe">Axe</option>
+                    <option value="spear">Spear</option>
+                    <option value="dagger">Dagger</option>
+                </select>
+
+                <input type="text" id="weapon-name" name="weapon-name" placeholder="Enter weapon name">
+
+                <input type="color" id="weapon-color" name="weapon-color" value="">
+
+                <input type="text" id="weapon-aura" name="weapon-aura" placeholder="Weapon aura">
+
+                <textarea id="weapon-description" name="weapon-description" rows="3" cols="40"
+                          placeholder="Enter your weapon description" ></textarea>
+
+                <button type="submit" class="btn-forge">Forge</button>
             </form>
         </div>
+
         <div id="blacksmith">
-            <h1>Happy New Year</h1>
-                <h1>Imagem gerada: </h1>
-                <img class="img" src="data:image/png;base64,{{ imagem_base64 }}" alt="Generated Image">
+            <h1>Forged weapon: </h1>
+            <img class="img" src="data:image/png;base64,{{ imagem_base64 }}" alt="Generated Image">
         </div>
     </section>
 </body>
