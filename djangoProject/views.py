@@ -1,4 +1,7 @@
 import base64
+import os
+from dotenv import load_dotenv
+from openai import OpenAI
 
 from PIL import Image
 from io import BytesIO
@@ -8,7 +11,11 @@ import requests
 
 def generateImage(request):
     if request.method == 'POST':
-        api_key = "SG_8205d40045f77812"
+        load_dotenv()
+
+        api_key = os.getenv("SEGMIND_API_KEY")
+        client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
         url = "https://api.segmind.com/v1/sdxl1.0-samaritan-3d"
 
         weapon_type = request.POST.get('weapon-type')
@@ -17,13 +24,25 @@ def generateImage(request):
         weapon_aura = request.POST.get('weapon-aura')
         weapon_description = request.POST.get('weapon-description')
 
-        prompt = (f"Craft a {weapon_color} {weapon_type} named '{weapon_name}' imbued with an aura of {weapon_aura}. "
+        prompt = (f"Give a brief description of a {weapon_color} {weapon_type} named {weapon_name} imbued with an aura of {weapon_aura}."
                   f"Description: '{weapon_description}'")
 
+        response_text = client.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system",
+                 "content": prompt + "\nAfter creating the weapon description, summarize the description"},
+            ]
+        )
+
+        final_prompt = response_text.choices[0].message.content
+
+        print(final_prompt)
+
         data = {
-          "prompt": prompt,
+          "prompt": final_prompt,
           "negative_prompt": "drawing, painting, crayon, sketch, graphite, impressionist, noisy, blurry, soft, "
-                             "deformed, ugly. young. long neck. (cross eyed:1.5). multiple characters",
+                             "deformed, ugly. young. long neck. (cross eyed:1.5). multiple characters, character, person",
           "samples": 1,
           "scheduler": "Euler a",
           "num_inference_steps": 25,
@@ -54,4 +73,3 @@ def generateImage(request):
             return render(request, 'generate_image.html', context)
 
     return render(request, 'generate_image.html')
-
