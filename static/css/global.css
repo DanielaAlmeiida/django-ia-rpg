@@ -1,0 +1,16 @@
+/* Variaveis */
+:root {
+  --yellow: #FFE195;
+}
+
+
+@font-face {
+    font-family: Old;
+    src: url("fonte/MedievalSharp-Book.ttf");
+}
+
+* {
+    font-family: Old, serif;
+}
+
+

@@ -1,0 +1,102 @@
+body {
+    background-image: url("Content/main-background.jpg");
+    background-size: 100vw 100vh;
+}
+
+#container {
+    height: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.img {
+    height: 100px;
+    width: 100px;
+}
+
+/* SECTION Form */
+.frame {
+    background-image: url("Content/frame.png");
+    background-size: cover;
+    height: 767px;
+    width: 482.3px;
+    align-items: center;
+}
+
+.form-forge{
+    height: 100%;
+    margin: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+input, textarea, select, button {
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
+
+::placeholder, .option-disabled {
+    opacity: .6;
+}
+
+input, label, input::placeholder, textarea::placeholder, select, button {
+  color: var(--yellow);
+}
+
+textarea {
+    background-color: rgba(255, 255, 255, .1);
+    width: 400px;
+}
+
+option {
+    background-color: black;
+}
+
+
+
+
+/* Usando absolute no botão forge */
+.btn-submit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-image {
+  width: 250px;
+}
+
+.btn-image, .btn-forge {
+  position: absolute;
+  margin-top: 60px;
+  cursor: pointer;
+}
+
+
+
+
+/* SECTION Forge */
+#forge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    gap: 50px;
+    color: black;
+    background-color: orange;
+    width: 300px;
+    height: 600px;
+}
+
+

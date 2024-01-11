@@ -3,42 +3,54 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style-generate-image.css' %}">
 
     <title>Weapon Forge</title>
 </head>
 <body>
-    <section id="container" class="box">
-        <div id="form">
-            <h1>Test</h1>
-            <form method="post" class="form-forge">
-                 {% csrf_token %}
-                <select id="weapon-type" name="weapon-type">
-                    <option value="sword">Sword</option>
-                    <option value="bow">Bow</option>
-                    <option value="staff">Staff</option>
-                    <option value="axe">Axe</option>
-                    <option value="spear">Spear</option>
-                    <option value="dagger">Dagger</option>
-                </select>
+    <main id="container" class="box">
+        <section id="form">
+            <div class="frame">
+                <form method="post" class="form-forge">
+                     {% csrf_token %}
+                    <select id="weapon-type" name="weapon-type" required>
+                        <option value="" class="option-disabled" disabled selected hidden>Select your weapon</option>
+                        <option value="sword">Sword</option>
+                        <option value="bow">Bow</option>
+                        <option value="staff">Staff</option>
+                        <option value="axe">Axe</option>
+                        <option value="spear">Spear</option>
+                        <option value="dagger">Dagger</option>
+                    </select>
 
-                <input type="text" id="weapon-name" name="weapon-name" placeholder="Enter weapon name">
+                    <input type="text" id="weapon-name" name="weapon-name" placeholder="Enter weapon name" required>
 
-                <input type="color" id="weapon-color" name="weapon-color" value="">
+                    <div>
+                        <label>Weapon color</label>
+                        <input type="color" id="weapon-color" name="weapon-color" value="" required>
+                    </div>
 
-                <input type="text" id="weapon-aura" name="weapon-aura" placeholder="Weapon aura">
+                    <input type="text" id="weapon-aura" name="weapon-aura" placeholder="Weapon aura" required>
 
-                <textarea id="weapon-description" name="weapon-description" rows="3" cols="40"
-                          placeholder="Enter your weapon description" ></textarea>
+                    <textarea id="weapon-description" name="weapon-description" rows="3" cols="40"
+                              placeholder="Enter your weapon description (optional)" ></textarea>
 
-                <button type="submit" class="btn-forge">Forge</button>
-            </form>
-        </div>
+                    <div class="btn-submit">
+                        <img src="../static/css/Content/button.png" class="btn-image">
+                        <button type="submit" class="btn-forge">Forge</button>
+                    </div>
+                </form>
+            </div>
+        </section>
 
-        <div id="blacksmith">
+        <section id="forge">
             <h1>Forged weapon: </h1>
-            <img class="img" src="data:image/png;base64,{{ imagem_base64 }}" alt="Generated Image">
-        </div>
-    </section>
+            <div class=".card">
+                <img class="img" src="data:image/png;base64,{{ imagem_base64 }}" alt="Generated Image">
+            </div>
+        </section>
+    </main>
 </body>
 </html>
