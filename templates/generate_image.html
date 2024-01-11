@@ -14,7 +14,7 @@
         <section id="form">
             <div class="frame">
                 <form method="post" class="form-forge">
-                     {% csrf_token %}
+                    {% csrf_token %}
                     <select id="weapon-type" name="weapon-type" required>
                         <option value="" class="option-disabled" disabled selected hidden>Select your weapon</option>
                         <option value="sword">Sword</option>
@@ -27,7 +27,7 @@
 
                     <input type="text" id="weapon-name" name="weapon-name" placeholder="Enter weapon name" required>
 
-                    <div>
+                    <div class="pick-color">
                         <label>Weapon color</label>
                         <input type="color" id="weapon-color" name="weapon-color" value="" required>
                     </div>
@@ -50,6 +50,8 @@
             <div class=".card">
                 <img class="img" src="data:image/png;base64,{{ imagem_base64 }}" alt="Generated Image">
             </div>
+
+
         </section>
     </main>
 </body>
