@@ -1,6 +1,8 @@
 /* Variaveis */
 :root {
   --yellow: #FFE195;
+  --black: #151515;
+  --border-yellow: #a19168;
 }
 
 
@@ -13,4 +15,6 @@
     font-family: Old, serif;
 }
 
-
+strong {
+    font-weight: 600;
+}

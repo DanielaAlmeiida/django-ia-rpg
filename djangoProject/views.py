@@ -28,15 +28,17 @@ def generateImage(request):
                   f"Description: '{weapon_description}'")
 
         response_text = client.chat.completions.create(
-            model="gpt-3.5-turbo",
             messages=[
                 {"role": "system",
                  "content": prompt + "\nAfter creating the weapon description, summarize the description"},
-            ]
+            ],
+            model="gpt-3.5-turbo",
+            max_tokens=50
         )
 
         final_prompt = response_text.choices[0].message.content
 
+        description = final_prompt
         print(final_prompt)
 
         data = {
@@ -65,9 +67,12 @@ def generateImage(request):
             byte_stream.seek(0)
 
             imagem_base64 = base64.b64encode(byte_stream.getvalue()).decode('utf-8')
+            x = ''
 
             context = {
                 'imagem_base64': imagem_base64,
+                'description': description,
+                'x': x,
             }
 
             return render(request, 'generate_image.html', context)
