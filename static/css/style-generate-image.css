@@ -140,6 +140,16 @@ input:-webkit-autofill {
     color: black;
 }
 
+.card-background{
+    height: 630px;
+    width: 355px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
 .card {
     width: 325px;
     height: 600px;
@@ -150,32 +160,21 @@ input:-webkit-autofill {
     position: relative;
 }
 
-/* Por gradiente na imagem
-.{
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background-image: linear-gradient(
-        0deg,
-        #1F1F1F 0%,
-        #151515 15.37%,
-        #171717 36.05%,
-        rgba(0, 0, 0, 0.83) 40.23%,
-        rgba(0, 0, 0, 0.00) 62.33%,
-        rgba(39, 39, 39, 0.67) 90%,
-        #353535 93.02%);
-}
-*/
-
 .card-img {
     position: relative;
-    background-color: black;
     height: 325px;
     width: 325px;
+    background-color: black;
+    animation: colorChange 7s linear infinite, gradientChange 3s linear infinite 7s;
 }
 
-.card-img > p {
+.generated-img {
+    height: 325px;
+    width: 325px;
+    display: none;
+}
+
+.card-img > small {
     position: absolute;
     inset: 0;
     display: flex;
@@ -184,26 +183,24 @@ input:-webkit-autofill {
     font-size: 150px;
 }
 
-.card-img, .img-generated {
-    height: 325px;
-    width: 325px;
-}
-
-.img-generated {
-    z-index: -2;
-}
-
 .card-header, .card-status {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-content: center;
     align-items: center;
 }
 
 .card-header {
-    justify-content: space-around;
-    padding: 10px;
+    justify-content: space-between;
+    padding: 10px 30px 10px 30px;
+}
+
+.card-header p {
+    align-items: center;
+}
+
+.card-rarity {
+    display: flex;
 }
 
 .card-footer {
@@ -224,12 +221,29 @@ input:-webkit-autofill {
     background-color: #2C2C2C;
     margin: 0px 20px 0px 20px;
     border-radius: 4px;
-    height: 50px;
+    height: 80px;
     text-align: justify;
     line-height: 10pt;
 }
 
 .ore-icon {
     height: 15px;
+    margin-right: 5px;
 }
 
+.ore-icon-header {
+    margin-left: 8px
+}
+
+
+@media (max-width: 1000px) {
+    #container {
+        flex-wrap: wrap;
+        gap: 80px;
+        padding: 42px;
+        height: 100%;
+    }
+    body {
+        background-image: url("Content/main-background-small.jpg");
+    }
+}

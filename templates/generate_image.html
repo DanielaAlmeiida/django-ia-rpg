@@ -6,133 +6,92 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style-generate-image.css' %}">
-    <!--
-    <script src="https://code.jquery.com/jquery-3.5.1.js"
-          integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-            crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script type="text/javascript">
-        $(document).on('submit','#form-forge',function(e) {
-            e.preventDefault();
-            $.ajax({
-                type:'POST',
-                url:'{% url "generate_image" %}',
-                data:
-                {
-                    task:$("#task").val(),
-                    csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
-                },
-                success:function(){
-                      alert('Saved');
-                        }
-                })
-            });
-    </script>
-
-    <script>
-        $('#btn-forge').click(function(){
-
-               alert('Your message');
-
-        });
-    </script>
-
-        <script src="{% static 'js/script.js' %}" defer></script>
-
-    <script>
-    $(document).ready(function() {
-        $('#form-forge').submit(function(e) {
-            e.preventDefault();
-
-            $.ajax({
-                type: 'POST',
-                url: '{% url "generate_image" %}',  // Substitua "nome_da_sua_view" pelo nome real da sua view
-                context: $(this).serialize(),
-                success: function(context) {
-                    $('.card-description p').html('<strong>Description:</strong> ' + context.description);
-                    $('#question-mark').hide();
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        });
-    });
-    </script>
-    -->
-
     <title>Weapon Forge</title>
-    </head>
-    <body>
-        <main id="container" class="box">
-            <section id="form">
-                <div class="frame">
-                    <form method="post" class="form-forge" id="form-forge" onsubmit="">
-                        {% csrf_token %}
-                        <select id="weapon-type" name="weapon-type" required>
-                            <option value="" class="option-disabled" disabled selected hidden>Select your weapon</option>
-                            <option value="sword">Sword</option>
-                            <option value="bow">Bow</option>
-                            <option value="staff">Staff</option>
-                            <option value="axe">Axe</option>
-                            <option value="spear">Spear</option>
-                            <option value="dagger">Dagger</option>
-                        </select>
+</head>
+<body>
+<main id="container" class="box">
+    <section id="form">
+        <div class="frame">
+            <form method="post" class="form-forge" id="form-forge" onsubmit="">
+                {% csrf_token %}
+                <select id="weapon-type" name="weapon-type" required>
+                    <option value="" class="option-disabled" disabled selected hidden>Select your weapon</option>
+                    <option value="SWORD">Sword</option>
+                    <option value="ARCHERY">Archery</option>
+                    <option value="STAFF">Staff</option>
+                    <option value="AXE">Axe</option>
+                    <option value="SPEAR">Spear</option>
+                    <option value="DAGGER">Dagger</option>
+                </select>
 
-                        <div class="pick-color">
-                            <label>Weapon color</label>
-                            <input type="color" id="weapon-color" name="weapon-color" value="" required>
-                        </div>
-
-                        <input type="text" id="weapon-name" name="weapon-name" placeholder="Enter weapon name" required>
-
-                        <input type="text" id="weapon-aura" name="weapon-aura" placeholder="Weapon aura" required>
-
-                        <textarea id="weapon-description" name="weapon-description" rows="3" cols="40"
-                                  placeholder="Enter your weapon description (optional)" ></textarea>
-
-                        <div class="btn-submit">
-                            <img src="../static/css/Content/button.png" class="btn-image">
-                            <button type="submit" class="btn-forge" id="btn-forge" onclick="a"><strong>Forge</strong></button>
-                        </div>
-                    </form>
+                <div class="pick-color">
+                    <label>Weapon color</label>
+                    <input type="color" id="weapon-color" name="weapon-color" value="" required>
                 </div>
-            </section>
 
-            <section id="forge">
-                <div class="card">
-                    <div class="card-header">
-                        <h1>Card name</h1>
-                        <p>?</p>
+                <input type="text" id="weapon-name" name="weapon-name" placeholder="Enter weapon name" required>
+
+                <input type="text" id="weapon-aura" name="weapon-aura" placeholder="Weapon aura" required>
+
+                <textarea id="weapon-description" name="weapon-description" rows="3" cols="40"
+                          placeholder="Enter your weapon description (optional)"></textarea>
+
+                <div class="btn-submit">
+                    <img src="../static/css/Content/button.png" class="btn-image">
+                    <button type="submit" class="btn-forge" id="btn-forge"><strong>Forge</strong></button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <section id="forge">
+        <div class="card-background">
+            <div class="card">
+                <div class="card-header">
+                    <h1 {{ x }}>Card name</h1>
+                    <h1>{{ cardName }}</h1>
+                    <p class="" {{ x }}>
+                        Opal
+                        <img class="ore-icon ore-icon-header" src="{% static 'css/img-ores/ore-Opal.png' %}">
+                    </p>
+                    <p class="card-rarity">
+                        {{ rarity_card }}
+                        <img class="ore-icon ore-icon-header" src="{{ ore_img }}">
+                    </p>
+                </div>
+                <div class="card-img">
+                    <img class="generated-img" style="{{ z }}" src="data:image/png;base64,{{ image_base64 }}"
+                         alt="Generated image">
+                    <small style="{{ y }}">?</small>
+                </div>
+                <div class="card-footer">
+                    <div class="card-type-id">
+                        <p {{ x }}>[WEAPON - WE0001]</p>
+                        <p>{{ type_weapon }}</p>
                     </div>
-                    <div class="card-img">
-                        <p id="question-mark">?</p>
+                    <div class="card-status">
+                        <ul>
+                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Opal.png' %}"> STR - ?</li>
+                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Emerald.png' %}"> VIT - ?</li>
+                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Gold.png' %}"> AGI - ?</li>
+                        </ul>
+                        <ul>
+                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Ruby.png' %}"> RES - ?</li>
+                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Silver.png' %}"> LUC - ?</li>
+                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Obsidian.png' %}"> INT - ?</li>
+                        </ul>
                     </div>
-                    <div class="card-footer">
-                        <div class="card-type-id">
-                            <p>[Weapon - WE0001 ]</p>
-                        </div>
-                        <div class="card-status">
-                            <ul>
-                                <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Opal.png' %}"> STR - ?</li>
-                                <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Emerald.png' %}"> VIT - ?</li>
-                                <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Gold.png' %}"> AGI - ?</li>
-                            </ul>
-                            <ul>
-                                <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Ruby.png' %}"> RES - ?</li>
-                                <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Silver.png' %}"> LUC - ?</li>
-                                <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Obsidian.png' %}"> INT - ?</li>
-                            </ul>
-                        </div>
-                        <div class="card-description">
-                            <p>
-                                <strong>Description:</strong> {{ description }}
-                            </p>
-                            <!--  Explore the world of possibilities within a card. -->
-                        </div>
+                    <div class="card-description">
+                        <p>
+                            <strong>Description:</strong><small {{ x }}> Explore the world of possibilities within a
+                            card.</small> {{ description }}
+                        </p>
                     </div>
                 </div>
-            </section>
-        </main>
-    </body>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
 </html>

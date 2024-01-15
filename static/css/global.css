@@ -5,6 +5,48 @@
   --border-yellow: #a19168;
 }
 
+@keyframes colorChange {
+    0% {
+        background-color: #D49286;
+    }
+    14.3% {
+        background-color: silver;
+    }
+    28.6% {
+        background-color: gold;
+    }
+    42.9% {
+        background-color: darkolivegreen;
+    }
+    57.2% {
+        background-color: lightblue;
+    }
+    71.5% {
+        background-color: firebrick;
+    }
+    85.8% {
+        background-color: black;
+    }
+}
+
+@keyframes gradientChange {
+    0% {
+        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    }
+    100% {
+        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    }
+}
+
+.card-img {
+    position: relative;
+    height: 325px;
+    width: 325px;
+    background-color: black;
+    animation: colorChange 7s linear infinite, gradientChange 3s linear infinite 7s;
+}
+
+
 
 @font-face {
     font-family: Old;
@@ -17,4 +59,8 @@
 
 strong {
     font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-transform: capitalize;
 }
