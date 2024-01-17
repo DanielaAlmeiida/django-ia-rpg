@@ -18,7 +18,7 @@
                 <select id="weapon-type" name="weapon-type" required>
                     <option value="" class="option-disabled" disabled selected hidden>Select your weapon</option>
                     <option value="SWORD">Sword</option>
-                    <option value="ARCHERY">Archery</option>
+                    <option value="BOW AND ARROW">Archery</option>
                     <option value="STAFF">Staff</option>
                     <option value="AXE">Axe</option>
                     <option value="SPEAR">Spear</option>
@@ -50,10 +50,10 @@
             <div class="card">
                 <div class="card-header">
                     <h1 {{ x }}>Card name</h1>
-                    <h1>{{ cardName }}</h1>
+                    <h1>{{ card_name }}</h1>
                     <p class="" {{ x }}>
                         Opal
-                        <img class="ore-icon ore-icon-header" src="{% static 'css/img-ores/ore-Opal.png' %}">
+                        <img class="ore-icon" src="{% static 'css/img-ores/ore-Opal.png' %}">
                     </p>
                     <p class="card-rarity">
                         {{ rarity_card }}
@@ -61,8 +61,7 @@
                     </p>
                 </div>
                 <div class="card-img">
-                    <img class="generated-img" style="{{ z }}" src="data:image/png;base64,{{ image_base64 }}"
-                         alt="Generated image">
+                    <img class="generated-img" style="{{ z }}" src="data:image/png;base64,{{ image_base64 }}" alt="Generated image">
                     <small style="{{ y }}">?</small>
                 </div>
                 <div class="card-footer">
@@ -70,13 +69,18 @@
                         <p {{ x }}>[WEAPON - WE0001]</p>
                         <p>{{ type_weapon }}</p>
                     </div>
-                    <div class="card-status">
-                        <ul>
+                    <div>
+                        <ul class="status-list-generated">
+                            {% for data in rarity_status %}
+                                <li><img class="ore-icon" src="{{ ore_img }}"> {{ type_status }} - {{ data.status }}</li>
+                            {% endfor %}
+                        </ul>
+                        <ul {{ x }}>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Opal.png' %}"> STR - ?</li>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Emerald.png' %}"> VIT - ?</li>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Gold.png' %}"> AGI - ?</li>
                         </ul>
-                        <ul>
+                        <ul {{ x }}>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Ruby.png' %}"> RES - ?</li>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Silver.png' %}"> LUC - ?</li>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Obsidian.png' %}"> INT - ?</li>
@@ -84,8 +88,9 @@
                     </div>
                     <div class="card-description">
                         <p>
-                            <strong>Description:</strong><small {{ x }}> Explore the world of possibilities within a
-                            card.</small> {{ description }}
+                            <strong>Description:</strong>
+                            <small {{ x }}> Explore the world of possibilities within a card.</small>
+                            {{ description }}
                         </p>
                     </div>
                 </div>
