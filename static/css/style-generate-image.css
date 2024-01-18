@@ -17,6 +17,10 @@ body {
     width: 100px;
 }
 
+font-large {
+    font-size: large;
+}
+
 /* SECTION Form */
 #form {
     display: flex;
@@ -138,18 +142,19 @@ input:-webkit-autofill {
 }
 
 .card-background{
-    height: 630px;
-    width: 355px;
+    height: 700px;
+    width: 390px;
     border-radius: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: black;
+    background-size: cover;
 }
 
 .card {
-    width: 325px;
-    height: 600px;
+    width: 360px;
+    height: 670px;
     border-radius: 20px;
     color: white;
     background-color: var(--black);
@@ -157,17 +162,17 @@ input:-webkit-autofill {
     position: relative;
 }
 
+.generated-img, .card-img {
+    height: 360px;
+    width: 360px;
+}
 .card-img {
     position: relative;
-    height: 325px;
-    width: 325px;
     background-color: black;
     animation: colorChange 7s linear infinite, gradientChange 3s linear infinite 7s;
 }
 
 .generated-img {
-    height: 325px;
-    width: 325px;
     display: none;
 }
 
@@ -194,42 +199,108 @@ input:-webkit-autofill {
 
 .card-rarity {
     display: flex;
+    display: none;
 }
 
 .card-footer {
    display: flex;
    flex-direction: column;
-   gap: 18px;
+   gap: 22px;
 }
 
 .card-type-id {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 12px;
+    padding-top: 16px;
 }
 
-ul.status-list-generated {
+.status-and-power {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-power {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #7088AD;
+    background: rgba(33, 140, 239, 0.12);
+    padding: 8px;
+}
+
+.card-power-title {
+    display: flex;
+    justify-content: center;
+}
+
+.star-icon {
+    height: 30px;
+}
+
+.power-title, .power-number {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, #60B2FF 64.5%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.power-title {
+    font-size: 20px;
+    line-height: normal;
+}
+
+.power-number {
+    font-size: 25px;
+    text-align: center;
+}
+
+ul.status-list-generated, ul.status-list  {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    height: 54px;
+    height: 66px;
+    justify-content: start;
+    gap: 7px;
+}
+
+ul.status-list-generated {
+    display: none;
+}
+
+ul.status-list {
+}
+
+.status-and-power {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
 }
+
+.status-and-power, .card-description {
+    margin: 0px 20px 0px 20px;
+}
+
 .card-description {
     padding: 12px;
     font-size: 12px;
     background-color: #2C2C2C;
-    margin: 0px 20px 0px 20px;
     border-radius: 4px;
     height: 80px;
     text-align: justify;
     line-height: 10pt;
 }
 
+.card-serie-number {
+    font-size: 8px;
+    margin-top: -15px;
+    text-align: center;
+}
+
 .ore-icon {
     height: 15px;
-    margin-right: 5px;
+    margin-right: 2px;
 }
 
 .ore-icon-header {
@@ -248,3 +319,4 @@ ul.status-list-generated {
         background-image: url("Content/main-background-small.jpg");
     }
 }
+

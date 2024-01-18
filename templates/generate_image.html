@@ -46,53 +46,68 @@
     </section>
 
     <section id="forge">
-        <div class="card-background">
+        <div class="card-background" style="background-image: url('../static/css/frame-ores/{{ rarity_card }}.png')">
             <div class="card">
                 <div class="card-header">
-                    <h1 {{ x }}>Card name</h1>
+                    <h1  style="{{ display_none }}">Card name</h1>
                     <h1>{{ card_name }}</h1>
-                    <p class="" {{ x }}>
+                    <p class="" style="{{ display_none }}">
                         Opal
                         <img class="ore-icon" src="{% static 'css/img-ores/ore-Opal.png' %}">
                     </p>
-                    <p class="card-rarity">
+                    <p class="card-rarity"  style="{{ display_block }}">
                         {{ rarity_card }}
-                        <img class="ore-icon ore-icon-header" src="{{ ore_img }}">
+                        <img class="ore-icon ore-icon-header" src="../static/css/img-ores/ore-{{ rarity_card }}.png">
                     </p>
                 </div>
                 <div class="card-img">
-                    <img class="generated-img" style="{{ z }}" src="data:image/png;base64,{{ image_base64 }}" alt="Generated image">
-                    <small style="{{ y }}">?</small>
+                    <img class="generated-img" style="{{ display_block }}" src="data:image/png;base64,{{ image_base64 }}" alt="Generated image">
+                    <small style="{{ display_none }}">?</small>
                 </div>
                 <div class="card-footer">
                     <div class="card-type-id">
-                        <p {{ x }}>[WEAPON - WE0001]</p>
+                        <p style="{{ display_none }}">[Weapon - 250]</p>
                         <p>{{ type_weapon }}</p>
                     </div>
-                    <div>
-                        <ul class="status-list-generated">
+                    <div class="status-and-power">
+                        <ul class="status-list-generated" style="{{ display_flex }}">
                             {% for data in rarity_status %}
-                                <li><img class="ore-icon" src="{{ ore_img }}"> {{ type_status }} - {{ data.status }}</li>
+                                <li>
+                                    <img class="ore-icon" src="../static/css/img-ores/ore-{{ data.rarity }}.png">
+                                    {{ data.type }} - {{ data.status }}
+                                </li>
                             {% endfor %}
                         </ul>
-                        <ul {{ x }}>
+                        <ul class="status-list"  style="{{ display_none }}">
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Opal.png' %}"> STR - ?</li>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Emerald.png' %}"> VIT - ?</li>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Gold.png' %}"> AGI - ?</li>
-                        </ul>
-                        <ul {{ x }}>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Ruby.png' %}"> RES - ?</li>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Silver.png' %}"> LUC - ?</li>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Obsidian.png' %}"> INT - ?</li>
                         </ul>
+                        <div class="card-power">
+                            <div class="card-power-title">
+                                <h2 class="power-title">Power</h2>
+                                <img class="star-icon" src="{% static 'css/Content/star.png' %}">
+                            </div>
+                            <p style="{{ display_none }}" class="power-number">0000</p>
+                            <p class="power-number">{{ final_status }}</p>
+                        </div>
                     </div>
                     <div class="card-description">
                         <p>
                             <strong>Description:</strong>
-                            <small {{ x }}> Explore the world of possibilities within a card.</small>
+                            <small style="{{ display_none }}"> Explore the world of possibilities within a card.</small>
                             {{ description }}
                         </p>
                     </div>
+
+                    <div class="card-serie-number">
+                        <p style="{{ display_none }}">WE-000.001</p>
+                        <p>{{ serial_number_weapon }}</p>
+                    </div>
+
                 </div>
             </div>
         </div>

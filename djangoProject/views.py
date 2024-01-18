@@ -121,65 +121,83 @@ def generateImage(request):
 
             ore_img = ""
             rarity_status = []
+            value_status = []
+            status_list = ['STR', 'INT', 'VIT', 'AGI', 'RES', 'LUC']
 
             if rarity_card == "Bronze":
-                ore_img = f"../static/css/img-ores/ore-{rarity_card}.png"
                 i = 1
                 for number in range(0, i):
                     rarity_carde, stats = item_status()
-                    card_info = {'rarity': rarity_carde, 'status': stats}
+                    value_status.append(stats)
+                    type_status = rd.choice(status_list)
+                    status_list.remove(type_status)
+                    card_info = {'rarity': rarity_carde, 'status': stats, 'type': type_status}
                     rarity_status.append(card_info)
             elif rarity_card == "Silver":
-                ore_img = f"../static/css/img-ores/ore-{rarity_card}.png"
                 i = 2
                 for number in range(0, i):
                     rarity_carde, stats = item_status()
-                    card_info = {'rarity': rarity_carde, 'status': stats}
+                    value_status.append(stats)
+                    type_status = rd.choice(status_list)
+                    status_list.remove(type_status)
+                    card_info = {'rarity': rarity_carde, 'status': stats, 'type': type_status}
                     rarity_status.append(card_info)
             elif rarity_card == "Gold":
-                ore_img = f"../static/css/img-ores/ore-{rarity_card}.png"
                 i = 3
                 for number in range(0, i):
                     rarity_carde, stats = item_status()
-                    card_info = {'rarity': rarity_carde, 'status': stats}
+                    value_status.append(stats)
+                    type_status = rd.choice(status_list)
+                    status_list.remove(type_status)
+                    card_info = {'rarity': rarity_carde, 'status': stats, 'type': type_status}
                     rarity_status.append(card_info)
             elif rarity_card == "Emerald":
-                ore_img = f"../static/css/img-ores/ore-{rarity_card}.png"
                 i = 4
                 for number in range(0, i):
                     rarity_carde, stats = item_status()
-                    card_info = {'rarity': rarity_carde, 'status': stats}
+                    value_status.append(stats)
+                    type_status = rd.choice(status_list)
+                    status_list.remove(type_status)
+                    card_info = {'rarity': rarity_carde, 'status': stats, 'type': type_status}
                     rarity_status.append(card_info)
             elif rarity_card == "Diamond":
-                ore_img = f"../static/css/img-ores/ore-{rarity_card}.png"
                 i = 5
                 for number in range(0, i):
                     rarity_carde, stats = item_status()
-                    card_info = {'rarity': rarity_carde, 'status': stats}
+                    value_status.append(stats)
+                    type_status = rd.choice(status_list)
+                    status_list.remove(type_status)
+                    card_info = {'rarity': rarity_carde, 'status': stats, 'type': type_status}
                     rarity_status.append(card_info)
             elif rarity_card == "Ruby":
-                ore_img = f"../static/css/img-ores/ore-{rarity_card}.png"
                 i = 6
                 for number in range(0, i):
                     rarity_carde, stats = item_status()
-                    card_info = {'rarity': rarity_carde, 'status': stats}
+                    value_status.append(stats)
+                    type_status = rd.choice(status_list)
+                    status_list.remove(type_status)
+                    card_info = {'rarity': rarity_carde, 'status': stats, 'type': type_status}
                     rarity_status.append(card_info)
             elif rarity_card == "Obsidian":
-                ore_img = f"../static/css/img-ores/ore-{rarity_card}.png"
                 i = 6
                 for number in range(0, i):
                     rarity_carde, stats = item_status()
-                    card_info = {'rarity': rarity_carde, 'status': stats}
+                    value_status.append(stats)
+                    type_status = rd.choice(status_list)
+                    status_list.remove(type_status)
+                    card_info = {'rarity': rarity_carde, 'status': stats, 'type': type_status}
                     rarity_status.append(card_info)
             else:
-                ore_img = f"../static/css/img-ores/ore-{rarity_card}.png"
                 i = 6
                 for number in range(0, i):
                     rarity_carde, stats = item_status()
-                    card_info = {'rarity': rarity_carde, 'status': stats}
+                    value_status.append(stats)
+                    type_status = rd.choice(status_list)
+                    status_list.remove(type_status)
+                    card_info = {'rarity': rarity_carde, 'status': stats, 'type': type_status}
                     rarity_status.append(card_info)
 
-            return rarity_card, status, ore_img, rarity_status
+            return rarity_card, status, rarity_status, value_status
 
         if response.status_code == 200:
             img = Image.open(BytesIO(response.content))
@@ -188,28 +206,27 @@ def generateImage(request):
             img.save(byte_stream, format='PNG')
             byte_stream.seek(0)
 
+            rarity_card, status, rarity_status, value_status = number_status()
             weapon_suf = weapon_type[0] + weapon_type[1]
-            serial_number = "0001"
-            type_weapon = f"[{weapon_type} - {weapon_suf}{serial_number}]"
+            serial_number_weapon = f"{weapon_suf}-000.001"
+            type_weapon = f"[{weapon_type} - {status}]"
             card_name = weapon_name
-            hidden, display_none, display_block = "hidden", "display: none", "display: block"
+            display_none, display_block, display_flex = "display: none", "display: block", "display: flex"
             image_base64 = base64.b64encode(byte_stream.getvalue()).decode('utf-8')
             description = final_prompt
-            rarity_card, status, ore_img, rarity_status = number_status()
-            status_list = ['STR', 'INT', 'VIT', 'AGI', 'RES', 'LUC']
-            type_status = rd.choice(status_list)
+            final_status = status + sum(value_status)
 
             context = {
-                'type_status': type_status,
+                'final_status': final_status,
                 'rarity_status': rarity_status,
                 'status': status,
-                'ore_img': ore_img,
                 'rarity_card': rarity_card,
                 'type_weapon': type_weapon,
+                'serial_number_weapon': serial_number_weapon,
                 'card_name': card_name,
-                'z': display_block,
-                'y': display_none,
-                'x': hidden,
+                'display_block': display_block,
+                'display_none': display_none,
+                'display_flex': display_flex,
                 'description': description,
                 'image_base64': image_base64,
             }
@@ -217,4 +234,3 @@ def generateImage(request):
             return render(request, 'generate_image.html', context)
 
     return render(request, 'generate_image.html')
-
