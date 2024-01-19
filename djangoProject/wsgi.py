@@ -13,5 +13,5 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'djangoProject.settings')
 
-#application = get_wsgi_application() #pro remoto, sem deploy
-app = get_wsgi_application() #pro vercel, deploy
+application = get_wsgi_application() #pro remoto, sem deploy
+app = application  #pro vercel, deploy
