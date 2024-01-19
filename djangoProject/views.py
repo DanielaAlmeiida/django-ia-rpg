@@ -12,6 +12,17 @@ from io import BytesIO
 from django.shortcuts import render
 import requests
 
+from django.http import HttpResponse
+
+def index(request):
+    html = f'''
+    <html>
+        <body>
+            <h1>Test Django deploy</h1>
+        </body>
+    </html>
+    '''
+    return HttpResponse(html)
 
 def generateImage(request):
     if request.method == 'POST':
