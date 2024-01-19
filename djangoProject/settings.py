@@ -40,6 +40,11 @@ INSTALLED_APPS = [
     'djangoProject.item_status',
     'djangoProject.number_status',
     'djangoProject', #example
+    'base',
+    'userauths',
+    'taggit',
+    'crispy_forms',
+    'django_social_share'
 ]
 
 MIDDLEWARE = [
