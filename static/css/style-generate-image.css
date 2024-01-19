@@ -1,6 +1,5 @@
 body {
     background-image: url("Content/main-background.jpg");
-    background-size: 100vh;
     background-size: cover;
 }
 
@@ -15,10 +14,6 @@ body {
 .img {
     height: 100px;
     width: 100px;
-}
-
-font-large {
-    font-size: large;
 }
 
 /* SECTION Form */
@@ -70,7 +65,7 @@ input, textarea, select, button, textarea {
 }
 
 input#weapon-color{
-    padding: 0px;
+    padding: 0;
     background-color: transparent;
     border: none;
     height: 40px;
@@ -150,6 +145,7 @@ input:-webkit-autofill {
     align-items: center;
     background-color: black;
     background-size: cover;
+    animation: frameOreChange 20s ease-in-out infinite;
 }
 
 .card {
@@ -169,7 +165,7 @@ input:-webkit-autofill {
 .card-img {
     position: relative;
     background-color: black;
-    animation: colorChange 7s linear infinite, gradientChange 3s linear infinite 7s;
+    animation: colorChange 20s linear infinite;
 }
 
 .generated-img {
@@ -198,7 +194,6 @@ input:-webkit-autofill {
 }
 
 .card-rarity {
-    display: flex;
     display: none;
 }
 
@@ -224,7 +219,7 @@ input:-webkit-autofill {
 .card-power {
     display: flex;
     flex-direction: column;
-    border: 1px solid #7088AD;
+    border: 1px solid #60B2FF;
     background: rgba(33, 140, 239, 0.12);
     padding: 8px;
 }
@@ -240,7 +235,6 @@ input:-webkit-autofill {
 
 .power-title, .power-number {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, #60B2FF 64.5%);
-    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -279,7 +273,7 @@ ul.status-list {
 }
 
 .status-and-power, .card-description {
-    margin: 0px 20px 0px 20px;
+    margin: 0 20px 0 20px;
 }
 
 .card-description {

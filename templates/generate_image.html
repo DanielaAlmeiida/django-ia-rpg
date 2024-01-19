@@ -18,21 +18,47 @@
                 <select id="weapon-type" name="weapon-type" required>
                     <option value="" class="option-disabled" disabled selected hidden>Select your weapon</option>
                     <option value="SWORD">Sword</option>
-                    <option value="BOW AND ARROW">Archery</option>
-                    <option value="STAFF">Staff</option>
+                    <option value="CROSSBOW">Crossbow</option>
+                    <option value="MAGIC WAND">Wand</option>
                     <option value="AXE">Axe</option>
                     <option value="SPEAR">Spear</option>
                     <option value="DAGGER">Dagger</option>
                 </select>
 
-                <div class="pick-color">
-                    <label>Weapon color</label>
-                    <input type="color" id="weapon-color" name="weapon-color" value="" required>
-                </div>
+               <select class="pick-color" id="weapon-color" name="weapon-color" required>
+                    <option value="" class="option-disabled" disabled selected hidden>Select a color</option>
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="orange">Orange</option>
+                    <option value="purple">Purple</option>
+                    <option value="brown">Brown</option>
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                    <option value="gray">Gray</option>
+                    <option value="golden">Golden</option>
+                    <option value="silver">Silver</option>
+                    <option value="turquoise">Turquoise</option>
+                    <option value="indigo">Indigo</option>
+                    <option value="pink">Pink</option>
+                </select>
 
-                <input type="text" id="weapon-name" name="weapon-name" placeholder="Enter weapon name" required>
-
-                <input type="text" id="weapon-aura" name="weapon-aura" placeholder="Weapon aura" required>
+                <select id="weapon-aura" name="weapon-aura" required>
+                    <option value="" class="option-disabled" disabled selected hidden>Select an element</option>
+                    <option value="lightning">Lightning</option>
+                    <option value="thunder">Thunder</option>
+                    <option value="poison">Poison</option>
+                    <option value="ice">Ice</option>
+                    <option value="fire">Fire</option>
+                    <option value="divine">Divine</option>
+                    <option value="magic">Magic</option>
+                    <option value="shadows">Shadows</option>
+                    <option value="rainbow">Rainbow</option>
+                    <option value="plasma">Plasma</option>
+                    <option value="arcane">Arcane</option>
+                    <option value="storm">Storm</option>
+                </select>
 
                 <textarea id="weapon-description" name="weapon-description" rows="3" cols="40"
                           placeholder="Enter your weapon description (optional)"></textarea>
@@ -46,7 +72,7 @@
     </section>
 
     <section id="forge">
-        <div class="card-background" style="background-image: url('../static/css/frame-ores/{{ rarity_card }}.png')">
+        <div class="card-background" style="background-image: url('../static/css/frame-ores/{{ rarity_card }}.png'); animation: {{ none }};">
             <div class="card">
                 <div class="card-header">
                     <h1  style="{{ display_none }}">Card name</h1>
@@ -86,13 +112,14 @@
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Silver.png' %}"> LUC - ?</li>
                             <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Obsidian.png' %}"> INT - ?</li>
                         </ul>
-                        <div class="card-power">
+                        <div class="card-power" style="background: rgba({{ power_color }} 0.12); border: 1px solid {{ color_back }};">
                             <div class="card-power-title">
-                                <h2 class="power-title">Power</h2>
+                                <h2 class="power-title" style="
+                                        background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Power</h2>
                                 <img class="star-icon" src="{% static 'css/Content/star.png' %}">
                             </div>
                             <p style="{{ display_none }}" class="power-number">0000</p>
-                            <p class="power-number">{{ final_status }}</p>
+                            <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ final_status }}</p>
                         </div>
                     </div>
                     <div class="card-description">

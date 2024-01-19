@@ -5,36 +5,58 @@
   --border-yellow: #a19168;
 }
 
-@keyframes colorChange {
-    0% {
-        background-color: #D49286;
+/* Textura dos minérios da borda da carta */
+@keyframes frameOreChange {
+    0%, 12.5% {
+        background-image: url("../css/frame-ores/Bronze.png");
     }
-    14.3% {
-        background-color: silver;
+    12.6%, 25% {
+        background-image: url("../css/frame-ores/Silver.png");
     }
-    28.6% {
-        background-color: gold;
+    25.1%, 37.5% {
+        background-image: url("../css/frame-ores/Gold.png");
     }
-    42.9% {
-        background-color: darkolivegreen;
+    37.6%, 50% {
+        background-image: url("../css/frame-ores/Emerald.png");
     }
-    57.2% {
-        background-color: lightblue;
+    50.1%, 62.5% {
+        background-image: url("../css/frame-ores/Diamond.png");
     }
-    71.5% {
-        background-color: firebrick;
+    62.6%, 75% {
+        background-image: url("../css/frame-ores/Ruby.png");
     }
-    85.8% {
-        background-color: black;
+    75.1%, 87.5% {
+        background-image: url("../css/frame-ores/Obsidian.png");
+    }
+    87.6%, 100% {
+        background-image: url("../css/frame-ores/Opal.png");
     }
 }
 
-@keyframes gradientChange {
-    0% {
-        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+@keyframes colorChange {
+    0%, 12.5% {
+        background-color: rgb(212, 146, 134);
     }
-    100% {
-        background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    12.6%, 25% {
+        background-color: rgb(166, 166, 166);
+    }
+    25.1%, 37.5% {
+        background-color: rgb(255, 215, 0);
+    }
+    37.6%, 50% {
+        background-color: rgb(0, 93, 69);
+    }
+    50.1%, 62.5% {
+        background-color: rgb(187, 219, 255);
+    }
+    62.6%, 75% {
+        background-color: rgb(150, 5, 14);
+    }
+    75.1%, 87.5% {
+        background-color: rgb(0, 0, 0);
+    }
+    87.6%, 100% {
+        background-color: rgb(177, 127, 190);
     }
 }
 
@@ -45,8 +67,6 @@
     background-color: black;
     animation: colorChange 7s linear infinite, gradientChange 3s linear infinite 7s;
 }
-
-
 
 @font-face {
     font-family: Old;
