@@ -25,6 +25,7 @@ SECRET_KEY = 'django-insecure-g*-6uh+5v@1k%ye4z2!&1z&snh-f_q@2sc(d^b-&be(ty8t3(t
 DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
+#ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -70,8 +71,8 @@ TEMPLATES = [
     },
 ]
 
-#WSGI_APPLICATION = 'djangoProject.wsgi.application' Ou retirar
-WSGI_APPLICATION = 'vercel_app.wsgi.app'
+#WSGI_APPLICATION = 'djangoProject.wsgi.application' #pro remoto, sem deploy
+WSGI_APPLICATION = 'vercel_app.wsgi.app' #pro vercel, deploy
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
