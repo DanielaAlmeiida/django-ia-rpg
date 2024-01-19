@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-g*-6uh+5v@1k%ye4z2!&1z&snh-f_q@2sc(d^b-&be(ty8t3(t
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 
 # Application definition
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'djangoProject.status_generator',
     'djangoProject.item_status',
     'djangoProject.number_status',
+    'djangoProject', #example
 ]
 
 MIDDLEWARE = [
@@ -69,8 +70,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'djangoProject.wsgi.application'
-
+#WSGI_APPLICATION = 'djangoProject.wsgi.application' Ou retirar
+WSGI_APPLICATION = 'vercel_app.wsgi.app'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
