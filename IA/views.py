@@ -1,7 +1,7 @@
-from djangoProject.full_power import full_power
-
-import base64
 import os
+
+from IA.full_power import full_power
+import base64
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -12,20 +12,10 @@ from io import BytesIO
 from django.shortcuts import render
 import requests
 
-from django.http import HttpResponse
-
-def index(request):
-    html = f'''
-    <html>
-        <body>
-            <h1>Test Django deploy</h1>
-        </body>
-    </html>
-    '''
-    return HttpResponse(html)
-
 def generateImage(request):
-    if request.method == 'POST':
+    if request.method == 'GET':
+        return render(request, 'index.html')
+    elif request.method == 'POST':
 
         load_dotenv()
         secret_key = os.getenv("SEGMIND_API_KEY")
@@ -51,7 +41,6 @@ def generateImage(request):
                                      "Summarize the description in just 1 paragraph with a maximum of 50 tokens"},
             ],
             model="gpt-3.5-turbo",
-
         )
 
         final_prompt = response_text.choices[0].message.content
@@ -109,6 +98,6 @@ def generateImage(request):
                 'image_base64': image_base64,
             }
 
-            return render(request, 'generate_image.html', context)
+            return render(request, 'index.html', context)
 
-    return render(request, 'generate_image.html')
+    return render(request, 'index.html')

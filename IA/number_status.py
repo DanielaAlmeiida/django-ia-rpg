@@ -1,4 +1,4 @@
-from djangoProject.item_status import item_status
+from IA.item_status import item_status
 import random as rd
 
 

@@ -1,5 +1,4 @@
-from djangoProject.number_status import number_status
-
+from IA.number_status import number_status
 
 def full_power():
     rarity_card, status, rarity_status, value_status = number_status()

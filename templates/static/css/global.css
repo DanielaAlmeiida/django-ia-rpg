@@ -8,28 +8,28 @@
 /* Textura dos minérios da borda da carta */
 @keyframes frameOreChange {
     0%, 12.5% {
-        background-image: url("../css/frame-ores/Bronze.png");
+        background-image: url("../content/frame-ores/Bronze.png");
     }
     12.6%, 25% {
-        background-image: url("../css/frame-ores/Silver.png");
+        background-image: url("../content/frame-ores/Silver.png");
     }
     25.1%, 37.5% {
-        background-image: url("../css/frame-ores/Gold.png");
+        background-image: url("../content/frame-ores/Gold.png");
     }
     37.6%, 50% {
-        background-image: url("../css/frame-ores/Emerald.png");
+        background-image: url("../content/frame-ores/Emerald.png");
     }
     50.1%, 62.5% {
-        background-image: url("../css/frame-ores/Diamond.png");
+        background-image: url("../content/frame-ores/Diamond.png");
     }
     62.6%, 75% {
-        background-image: url("../css/frame-ores/Ruby.png");
+        background-image: url("../content/frame-ores/Ruby.png");
     }
     75.1%, 87.5% {
-        background-image: url("../css/frame-ores/Obsidian.png");
+        background-image: url("../content/frame-ores/Obsidian.png");
     }
     87.6%, 100% {
-        background-image: url("../css/frame-ores/Opal.png");
+        background-image: url("../content/frame-ores/Opal.png");
     }
 }
 
@@ -70,7 +70,7 @@
 
 @font-face {
     font-family: Old;
-    src: url("fonte/MedievalSharp-Book.ttf");
+    src: url("../content/fonte/MedievalSharp-Book.ttf");
 }
 
 * {

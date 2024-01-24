@@ -1,6 +1,7 @@
 body {
-    background-image: url("Content/main-background.jpg");
+    background-image: url("../content/img/main-background.jpg");
     background-size: cover;
+    cursor: url("../content/img/button.png"), auto;
 }
 
 #container {
@@ -32,7 +33,7 @@ body {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url("Content/frame.png");
+    background-image: url("../content/img/frame.png");
     background-size: cover;
     background-position: bottom;
     z-index: -1;
@@ -310,7 +311,8 @@ ul.status-list {
         height: 100%;
     }
     body {
-        background-image: url("Content/main-background-small.jpg");
+        background-image: url("../content/img/main-background-small.jpg");
+        background-size: cover;
     }
 }
 

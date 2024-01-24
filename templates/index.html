@@ -8,6 +8,38 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style-generate-image.css' %}">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>Weapon Forge</title>
+
+    <!--
+    <script>
+    $(document).ready(function () {
+        // Função para atualizar as opções dos selects com base na seleção do weapon-type
+        $("#weapon-type").change(function () {
+            var selectedWeapon = $(this).val();
+
+            // Lógica para atualizar o segundo select (weapon-color) com base na escolha do primeiro
+            // Exemplo: Adapte conforme necessário
+            if (selectedWeapon === "SWORD") {
+                $("#weapon-color").html(`
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    // Adicione mais opções conforme necessário
+                `);
+            } else if (selectedWeapon === "CROSSBOW") {
+                $("#weapon-color").html(`
+                    <option value="red">black</option>
+                    <option value="blue">white</option>
+                    // Adicione mais opções conforme necessário
+                `);
+            } else if (selectedWeapon === "MAGIC WAND") {
+                // Atualize conforme necessário para a escolha de MAGIC WAND
+            }
+            // Adicione mais lógica conforme necessário para outros selects
+
+            // Limpe as opções dos outros selects (weapon-aura, weapon-name, etc.) se necessário
+        });
+    });
+</script>
+-->
 </head>
 <body>
 <main id="container" class="box">
@@ -60,11 +92,13 @@
                     <option value="storm">Storm</option>
                 </select>
 
+                <input type="text" id="weapon-name" name="weapon-name" placeholder="Enter weapon name" required>
+
                 <textarea id="weapon-description" name="weapon-description" rows="3" cols="40"
                           placeholder="Enter your weapon description (optional)"></textarea>
 
                 <div class="btn-submit">
-                    <img src="../static/css/Content/button.png" class="btn-image">
+                    <img src="{% static 'content/img/button.png' %}" class="btn-image">
                     <button type="submit" class="btn-forge" id="btn-forge"><strong>Forge</strong></button>
                 </div>
             </form>
@@ -72,18 +106,18 @@
     </section>
 
     <section id="forge">
-        <div class="card-background" style="background-image: url('../static/css/frame-ores/{{ rarity_card }}.png'); animation: {{ none }};">
+        <div class="card-background" style="background-image: url('templates/static/content/frame-ores/{{ rarity_card }}.png'); animation: {{ none }};">
             <div class="card">
                 <div class="card-header">
                     <h1  style="{{ display_none }}">Card name</h1>
                     <h1>{{ card_name }}</h1>
                     <p class="" style="{{ display_none }}">
                         Opal
-                        <img class="ore-icon" src="{% static 'css/img-ores/ore-Opal.png' %}">
+                        <img class="ore-icon" src="{% static 'content/img-ores/ore-Opal.png' %}">
                     </p>
                     <p class="card-rarity"  style="{{ display_block }}">
                         {{ rarity_card }}
-                        <img class="ore-icon ore-icon-header" src="../static/css/img-ores/ore-{{ rarity_card }}.png">
+                        <img class="ore-icon ore-icon-header" src="templates/static/content/img-ores/ore-{{ rarity_card }}.png">
                     </p>
                 </div>
                 <div class="card-img">
@@ -97,26 +131,26 @@
                     </div>
                     <div class="status-and-power">
                         <ul class="status-list-generated" style="{{ display_flex }}">
-                            {% for data in rarity_status %}
+                             {% for data in rarity_status %}
                                 <li>
-                                    <img class="ore-icon" src="../static/css/img-ores/ore-{{ data.rarity }}.png">
+                                    <img class="ore-icon" src="{% static 'content/img-ores/ore-'|add:data.rarity|add:'.png' %}">
                                     {{ data.type }} - {{ data.status }}
                                 </li>
                             {% endfor %}
                         </ul>
                         <ul class="status-list"  style="{{ display_none }}">
-                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Opal.png' %}"> STR - ?</li>
-                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Emerald.png' %}"> VIT - ?</li>
-                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Gold.png' %}"> AGI - ?</li>
-                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Ruby.png' %}"> RES - ?</li>
-                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Silver.png' %}"> LUC - ?</li>
-                            <li><img class="ore-icon" src="{% static 'css/img-ores/ore-Obsidian.png' %}"> INT - ?</li>
+                            <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Opal.png' %}"> STR - ?</li>
+                            <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Emerald.png' %}"> VIT - ?</li>
+                            <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Gold.png' %}"> AGI - ?</li>
+                            <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Ruby.png' %}"> RES - ?</li>
+                            <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Silver.png' %}"> LUC - ?</li>
+                            <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Obsidian.png' %}"> INT - ?</li>
                         </ul>
                         <div class="card-power" style="background: rgba({{ power_color }} 0.12); border: 1px solid {{ color_back }};">
                             <div class="card-power-title">
                                 <h2 class="power-title" style="
                                         background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Power</h2>
-                                <img class="star-icon" src="{% static 'css/Content/star.png' %}">
+                                <img class="star-icon" src="{% static 'content/img/star.png' %}">
                             </div>
                             <p style="{{ display_none }}" class="power-number">0000</p>
                             <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ final_status }}</p>

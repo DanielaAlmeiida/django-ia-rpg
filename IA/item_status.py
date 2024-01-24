@@ -1,4 +1,4 @@
-from djangoProject.status_generator import status_generator
+from IA.status_generator import status_generator
 
 listOfRarity = ["Bronze", "Silver", "Gold", "Emerald", "Diamond", "Ruby", "Obsidian", "Opal"]
 
