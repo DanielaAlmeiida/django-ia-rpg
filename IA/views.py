@@ -22,7 +22,7 @@ import requests
 
 def cadastro(request):
     if request.method == 'GET':
-        return render(request, 'cadastro.html')
+        return render(request, 'login.html')
     else:
         username = request.POST.get('username')
         email = request.POST.get('email')
@@ -52,7 +52,7 @@ def login(request):
             login_django(request, user)
             return redirect("/generate/")
         else:
-            return HttpResponse('Senho e/ou user incorretos')
+            return HttpResponse('Senha e/ou user incorretos')
 
 
 @login_required(login_url='/login/')
