@@ -1,4 +1,11 @@
 import os
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as login_django
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+
+from django.http import HttpResponse
 
 from IA.full_power import full_power
 import base64
@@ -12,7 +19,44 @@ from io import BytesIO
 from django.shortcuts import render
 import requests
 
-def generateImage(request):
+
+def cadastro(request):
+    if request.method == 'GET':
+        return render(request, 'cadastro.html')
+    else:
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        user = User.objects.filter(username=username).first()
+
+        if user:
+            return HttpResponse('Já existe um usuário com esse username')
+
+        user = User.objects.create_user(username=username, email=email, password=password)
+        user.save()
+
+        return redirect("/login/")
+
+
+def login(request):
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    else:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            login_django(request, user)
+            return redirect("/generate/")
+        else:
+            return HttpResponse('Senho e/ou user incorretos')
+
+
+@login_required(login_url='/login/')
+def generate_image(request):
     if request.method == 'GET':
         return render(request, 'index.html')
     elif request.method == 'POST':
@@ -38,7 +82,7 @@ def generateImage(request):
             messages=[
                 {"role": "system",
                  "content": prompt + "\nAfter creating the weapon description, "
-                                     "Summarize the description in just 1 paragraph with a maximum of 50 tokens"},
+                                     "Summarize the description in just 1 paragraph with a maximum of 45 tokens"},
             ],
             model="gpt-3.5-turbo",
         )

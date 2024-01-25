@@ -1,82 +1,52 @@
-/* Variaveis */
+/* Variables */
 :root {
-  --yellow: #FFE195;
+  --yellow: #FFDC82;
   --black: #151515;
+  --bright-yellow: #FFD15C;
   --border-yellow: #a19168;
 }
 
-/* Textura dos minérios da borda da carta */
-@keyframes frameOreChange {
-    0%, 12.5% {
-        background-image: url("../content/frame-ores/Bronze.png");
-    }
-    12.6%, 25% {
-        background-image: url("../content/frame-ores/Silver.png");
-    }
-    25.1%, 37.5% {
-        background-image: url("../content/frame-ores/Gold.png");
-    }
-    37.6%, 50% {
-        background-image: url("../content/frame-ores/Emerald.png");
-    }
-    50.1%, 62.5% {
-        background-image: url("../content/frame-ores/Diamond.png");
-    }
-    62.6%, 75% {
-        background-image: url("../content/frame-ores/Ruby.png");
-    }
-    75.1%, 87.5% {
-        background-image: url("../content/frame-ores/Obsidian.png");
-    }
-    87.6%, 100% {
-        background-image: url("../content/frame-ores/Opal.png");
-    }
-}
 
-@keyframes colorChange {
-    0%, 12.5% {
-        background-color: rgb(212, 146, 134);
-    }
-    12.6%, 25% {
-        background-color: rgb(166, 166, 166);
-    }
-    25.1%, 37.5% {
-        background-color: rgb(255, 215, 0);
-    }
-    37.6%, 50% {
-        background-color: rgb(0, 93, 69);
-    }
-    50.1%, 62.5% {
-        background-color: rgb(187, 219, 255);
-    }
-    62.6%, 75% {
-        background-color: rgb(150, 5, 14);
-    }
-    75.1%, 87.5% {
-        background-color: rgb(0, 0, 0);
-    }
-    87.6%, 100% {
-        background-color: rgb(177, 127, 190);
-    }
-}
-
-.card-img {
-    position: relative;
-    height: 325px;
-    width: 325px;
-    background-color: black;
-    animation: colorChange 7s linear infinite, gradientChange 3s linear infinite 7s;
-}
-
+/* General */
 @font-face {
     font-family: Old;
     src: url("../content/fonte/MedievalSharp-Book.ttf");
 }
 
-* {
+html, * {
     font-family: Old, serif;
 }
 
+body {
+    background-image: url("../content/img/main-background.jpg");
+    background-size: cover;
+    color: var(--yellow);
+}
+
+
+/* Button & Links */
+.btn-main {
+    color: #150F0F;
+    background: linear-gradient(270deg, #DF8D13 0.01%, #FFCD6B 93.53%);
+    box-shadow: 5px 6px 4px 0px rgba(169, 154, 115, 0.72);
+    padding: 8px 40px 8px 40px;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-main:hover {
+    color: black;
+    background: linear-gradient(270deg, #C97F0F 0.01%, #EAB245 93.53%);
+    box-shadow: 5px 6px 4px 0px rgba(169, 154, 115, 0.72);
+}
+
+a:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+
+/* Title & Fonts */
 strong {
     font-weight: 600;
 }
@@ -84,4 +54,39 @@ strong {
 h1, h2, h3, h4, h5, h6 {
     text-transform: capitalize;
     font-size: large;
+}
+
+
+/* Form */
+input, textarea, select, button, label {
+    border: none;
+    outline: none;
+    font-size: 20px;
+    padding: 5px;
+}
+
+input, textarea, select, button {
+    background-color: var(--black);
+}
+
+input, textarea, select, button, textarea {
+    border: solid var(--border-yellow);
+    border-width: 0 1px 1px 0;
+}
+
+input, label, textarea, select, button, input::placeholder, textarea::placeholder  {
+  color: var(--yellow);
+}
+
+::placeholder, .option-disabled{
+    opacity: .6;
+}
+
+/* Cor de fundo do autocomplete */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 30px var(--black) inset;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: var(--yellow) !important;
 }

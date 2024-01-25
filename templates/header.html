@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="" alt="Logo image">
+            <h1>RPG Forger</h1>
+        </div>
+        <div class="header-links">
+             <nav>
+                <ul class="nav-links">
+                    <li><a class="link-select" href="">Home</a></li>
+                    <li><a class="link-select" href="/generate">Forge</a></li>
+                    <li><a class="link-select link-selected" href="/login">Log in</a></li>
+                </ul>
+            </nav>
+            <div class="language">
+                <ul>
+                    <li class="language-item">
+                        <img src="../static/content/img/us.jpg" alt="US Flag">
+                        <small>EN-US</small>
+                    </li>
+                    <li class="language-item">
+                        <img src="../static/content/img/br.png" alt="BR Flag">
+                        <small>PT-BR</small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}{% endblock %}
+
+</body>
+</html>
+
+
+
+

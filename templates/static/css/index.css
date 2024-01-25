@@ -1,11 +1,5 @@
-body {
-    background-image: url("../content/img/main-background.jpg");
-    background-size: cover;
-    cursor: url("../content/img/button.png"), auto;
-}
-
 #container {
-    height: 100vh;
+    height: calc(100vh - 80px);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -49,22 +43,6 @@ body {
     padding: 0 40px 0 40px;
 }
 
-input, textarea, select, button, label {
-    border: none;
-    outline: none;
-    font-size: 20px;
-    padding: 5px;
-}
-
-input, textarea, select, button {
-    background-color: var(--black);
-}
-
-input, textarea, select, button, textarea {
-    border: solid var(--border-yellow);
-    border-width: 0 1px 1px 0;
-}
-
 input#weapon-color{
     padding: 0;
     background-color: transparent;
@@ -78,14 +56,6 @@ input#weapon-color{
     gap: 5px;
 }
 
-::placeholder, .option-disabled{
-    opacity: .6;
-}
-
-input, label, textarea, select, button, input::placeholder, textarea::placeholder  {
-  color: var(--yellow);
-}
-
 textarea {
     background-color: var(--black) ;
     width: 400px;
@@ -94,35 +64,6 @@ textarea {
 
 option {
     background-color: var(--black) ;
-}
-
-/* Cor de fundo do autocomplete */
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px var(--black) inset;
-}
-
-input:-webkit-autofill {
-    -webkit-text-fill-color: var(--yellow) !important;
-}
-
-/* Usando absolute no botão forge */
-.btn-submit {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-image {
-    width: 250px;
-}
-
-.btn-image, .btn-forge {
-    position: absolute;
-    margin-top: 60px;
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
 }
 
 
@@ -263,9 +204,6 @@ ul.status-list-generated {
     display: none;
 }
 
-ul.status-list {
-}
-
 .status-and-power {
     display: flex;
     flex-direction: row;
@@ -300,6 +238,62 @@ ul.status-list {
 
 .ore-icon-header {
     margin-left: 8px
+}
+
+
+/* Textura dos minérios da borda da carta */
+@keyframes frameOreChange {
+    0%, 12.5% {
+        background-image: url("../content/frame-ores/Bronze.png");
+    }
+    12.6%, 25% {
+        background-image: url("../content/frame-ores/Silver.png");
+    }
+    25.1%, 37.5% {
+        background-image: url("../content/frame-ores/Gold.png");
+    }
+    37.6%, 50% {
+        background-image: url("../content/frame-ores/Emerald.png");
+    }
+    50.1%, 62.5% {
+        background-image: url("../content/frame-ores/Diamond.png");
+    }
+    62.6%, 75% {
+        background-image: url("../content/frame-ores/Ruby.png");
+    }
+    75.1%, 87.5% {
+        background-image: url("../content/frame-ores/Obsidian.png");
+    }
+    87.6%, 100% {
+        background-image: url("../content/frame-ores/Opal.png");
+    }
+}
+
+@keyframes colorChange {
+    0%, 12.5% {
+        background-color: rgb(212, 146, 134);
+    }
+    12.6%, 25% {
+        background-color: rgb(166, 166, 166);
+    }
+    25.1%, 37.5% {
+        background-color: rgb(255, 215, 0);
+    }
+    37.6%, 50% {
+        background-color: rgb(0, 93, 69);
+    }
+    50.1%, 62.5% {
+        background-color: rgb(187, 219, 255);
+    }
+    62.6%, 75% {
+        background-color: rgb(150, 5, 14);
+    }
+    75.1%, 87.5% {
+        background-color: rgb(0, 0, 0);
+    }
+    87.6%, 100% {
+        background-color: rgb(177, 127, 190);
+    }
 }
 
 

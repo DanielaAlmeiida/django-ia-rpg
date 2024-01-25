@@ -1,0 +1,59 @@
+header {
+    border-bottom: 1px solid #FFDC82;
+    background-color: #211919; /* Marrom header */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 79px;
+}
+
+.logo > h1 {
+    font-size: 30px;
+}
+
+a {
+    font-size: 18px;
+    opacity: .5;
+}
+
+small {
+    font-size: 10px;
+}
+
+.logo, ul {
+    display: flex;
+    gap: 50px;
+}
+
+div.language, .logo, a {
+    padding: 26px;
+}
+
+ul.nav-links {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.link-select:hover, .link-selected {
+    opacity: 1;
+}
+
+.link-selected {
+    border-bottom: 2px solid var(--yellow);
+}
+
+.header-links {
+    display: flex;
+    gap: 100px;
+}
+
+.language-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.language-item > img {
+    width: 24px;
+}

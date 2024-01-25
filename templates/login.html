@@ -1,0 +1,84 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <head>
+        {{ block.super }}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            function btnLoginAction() {
+                $("#btn-signup").addClass("low-opacity");
+                $("#signup-form").addClass("invisible");
+
+                $("#btn-login").removeClass("low-opacity");
+                $("#login-form").removeClass("invisible");
+            }
+
+            function btnSignupAction() {
+                $("#btn-login").addClass("low-opacity");
+                $("#login-form").addClass("invisible");
+
+                $("#btn-signup").removeClass("low-opacity");
+                $("#signup-form").removeClass("invisible");
+            }
+        </script>
+        <script>
+            $(document).ready(function() {
+                $("#signup-form").submit(function(event) {
+                    var email = $("#email-signup").val();
+                    if (!validateEmail(email)) {
+                        alert("Please enter a valid email address.");
+                        event.preventDefault();
+                    }
+                });
+
+                $("#login-form").submit(function(event) {
+                    var emailOrUsername = $("#username-login").val();
+                    if (emailOrUsername.trim() === "") {
+                        alert("Please enter your username or email.");
+                        event.preventDefault();
+                    }
+                });
+            });
+
+            function validateEmail(email) {
+                var re = /\S+@\S+\.\S+/;
+                return re.test(email);
+            }
+        </script>
+    </head>
+
+    <main>
+        <div class="sections">
+            <section class="section-img"></section>
+
+            <section class="section-form">
+                <div class="btn-switch">
+                    <button class="btn-main" id="btn-login" onclick="btnLoginAction()">Log in</button>
+                    <button class="btn-main low-opacity" id="btn-signup" onclick="btnSignupAction()">Sign up</button>
+                </div>
+
+                <form action="{% url 'cadastro' %}" method="POST" id="signup-form" class="invisible">
+                    {% csrf_token %}
+                    <h1>Create your account</h1>
+                    <input type="text" id="username-signup" name="username" placeholder="Username" required>
+                    <input type="email" id="email-signup" name="email" placeholder="Email" required>
+                    <input type="password" id="password-signup" name="password" placeholder="Password" required>
+                    <input type="submit" value="Create "  class="btn-main">
+                </form>
+                <form action="{% url 'login' %}" method="POST" id="login-form">
+                    {% csrf_token %}
+                    <h1>Enter your account</h1>
+                    <input type="text" id="username-login" name="username" placeholder="Username or email" required>
+                    <input type="password" id="password-login" name="password" placeholder="Password" required>
+                    <input type="submit" value="Enter"  class="btn-main">
+                </form>
+
+            </section>
+        </div>
+    </main>
+{% endblock %}
+
