@@ -20,9 +20,14 @@ small {
     font-size: 10px;
 }
 
-.logo, ul {
+ul {
     display: flex;
     gap: 50px;
+}
+
+.logo {
+   display: flex;
+   gap: 10px;
 }
 
 div.language, .logo, a {
