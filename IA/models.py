@@ -1,14 +1,8 @@
+from django.contrib.auth.models import User
 from django.db import models
 
-class User(models.Model):
-    id = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=30, unique=True)
-    email = models.EmailField(max_length=50, unique=True)
-    password = models.CharField(max_length=30)
-
-    
 class Card(models.Model):
-    
+
     class OptionsCategory(models.TextChoices):
         OPTION1 = 'Weapon'
         OPTION2 = 'Potion'
@@ -33,17 +27,21 @@ class Card(models.Model):
         OPTION8 = 'Opal'
 
     id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.CharField(max_length=20, choices=OptionsCategory.choices)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    category = models.CharField(max_length=20, choices=OptionsCategory.choices, default="Weapons")
     name = models.CharField(max_length=30)
     rarity = models.CharField(max_length=20, choices=OptionsRarity.choices)
+    image = models.CharField(max_length=50, default="default.png")
     type = models.CharField(max_length=20, choices=OptionsType.choices)
     status_card = models.IntegerField()
     power = models.IntegerField()
-    description = models.CharField(max_length=150)
+    description = models.CharField(max_length=500)
+    serial = models.CharField(max_length=20, default="WE-000.001")
+
+    objects = models.Manager()
+
 
 class Status(models.Model):
-    
     class OptionsStatus(models.TextChoices):
         OPTION1 = 'STR'
         OPTION2 = 'VIT'
@@ -51,7 +49,7 @@ class Status(models.Model):
         OPTION4 = 'AGI'
         OPTION5 = 'LUC'
         OPTION6 = 'INT'
-    
+
     class OptionsRarity(models.TextChoices):
         OPTION1 = 'Bronze'
         OPTION2 = 'Silver'
@@ -61,16 +59,15 @@ class Status(models.Model):
         OPTION6 = 'Ruby'
         OPTION7 = 'Obsidian'
         OPTION8 = 'Opal'
+
     id = models.AutoField(primary_key=True)
-    card = models.ForeignKey(Card, on_delete=models.CASCADE)
+    card = models.ForeignKey(Card, on_delete=models.CASCADE, null=False)
     rarity = models.CharField(max_length=20, choices=OptionsRarity.choices)
     attribute = models.CharField(max_length=10, choices=OptionsStatus.choices)
     stats = models.IntegerField()
-    
 
-    
-'''
-class Card(models.Model):
+
+'''class Card(models.Model):
     
     Options_category = [(option.value, option.name) for option in OptionsCategory]
     Options_type = [(option.value, option.name) for option in OptionsType]
@@ -86,5 +83,11 @@ class Card(models.Model):
     description = models.TextField()
     
     def __str__(self):
-        return {self.name}, {self.category}, {self.type}, {self.rarity}, {self.description}
-'''
+        return {self.name}, {self.category}, {self.type}, {self.rarity}, {self.description}'''
+
+'''class User(models.Model):
+
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=30, unique=True)
+    email = models.EmailField(max_length=50, unique=True)
+    password = models.CharField(max_length=30)'''

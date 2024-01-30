@@ -5,9 +5,9 @@ The generated cards are divided into 3 categories: Weapon, Potion, and Armor. Ea
 category has various different types, capable of generating a variety of unique items.
 
 #### Card Forging Screen
-![Card Forging Screen](forger.png)
+![Card Forging Screen](README/forger.png)
 #### Forged Card Result
-![Forged Card Result](forger_result.png)
+![Forged Card Result](README/forger_result.png)
 
 <!--
 Sumário

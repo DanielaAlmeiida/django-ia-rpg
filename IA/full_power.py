@@ -1,5 +1,6 @@
 from IA.number_status import number_status
 
+
 def full_power():
     rarity_card, status, rarity_status, value_status = number_status()
 
@@ -27,4 +28,4 @@ def full_power():
         power_color = "218, 165, 32,"
         color_back = "#daa520"
 
-    return power_color, final_status, color_back, rarity_card, status, rarity_status, value_status
+    return power_color, final_status, color_back, rarity_card, status, rarity_status

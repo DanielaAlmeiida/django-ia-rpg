@@ -1,7 +1,6 @@
 import os
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
-from django.contrib.auth import login as login_django
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 
@@ -18,6 +17,8 @@ from io import BytesIO
 
 from django.shortcuts import render
 import requests
+
+from IA.models import Card, Status
 
 
 def cadastro(request):
@@ -36,7 +37,7 @@ def cadastro(request):
         user = User.objects.create_user(username=username, email=email, password=password)
         user.save()
 
-        return redirect("/login/")
+        return redirect('/login/')
 
 
 def login(request):
@@ -46,14 +47,18 @@ def login(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
+        user = auth.authenticate(request, username=username, password=password)
 
         if user:
-            login_django(request, user)
-            return redirect("/generate/")
+            auth.login(request, user)
+            return redirect('/generate/')
         else:
             return HttpResponse('Senha e/ou user incorretos')
 
+
+def logout(request):
+    auth.logout(request)
+    return redirect("/generate/")
 
 @login_required(login_url='/login/')
 def generate_image(request):
@@ -76,13 +81,12 @@ def generate_image(request):
         prompt = (
             f"Give a brief description of a {weapon_color} {weapon_type} "
             f"named {weapon_name} imbued with an aura of {weapon_aura}."
-            f"Description: '{weapon_description}'")
+            f"\nShort description entered by the user (optional): '{weapon_description}'")
 
         response_text = client.chat.completions.create(
             messages=[
                 {"role": "system",
-                 "content": prompt + "\nAfter creating the weapon description, "
-                                     "Summarize the description in just 1 paragraph with a maximum of 45 tokens"},
+                 "content": prompt + "\n Make the description no longer than 3 lines"},
             ],
             model="gpt-3.5-turbo",
         )
@@ -108,37 +112,71 @@ def generate_image(request):
 
         response = requests.post(url, json=data, headers={'x-api-key': secret_key})
 
+        if url == "http://localhost/pt-br/":
+
+            response_text = client.chat.completions.create(
+                messages=[
+                    {"role": "system",
+                     "content": prompt + "\n Make the description no longer than 3 lines"},
+                ],
+                model="gpt-3.5-turbo",
+            )
+
+
         if response.status_code == 200:
             img = Image.open(BytesIO(response.content))
 
             byte_stream = BytesIO()
             img.save(byte_stream, format='PNG')
             byte_stream.seek(0)
+            img.show()
 
-            power_color, final_status, color_back, rarity_card, status, rarity_status, value_status = full_power()
-            weapon_suf = weapon_type[0] + weapon_type[1]
-            serial_number_weapon = f"{weapon_suf}-000.001"
-            type_weapon = f"[{weapon_type} - {status}]"
-            card_name = weapon_name
-            display_none, display_block, display_flex, none = "display: none", "display: block", "display: flex", "none"
             image_base64 = base64.b64encode(byte_stream.getvalue()).decode('utf-8')
-            description = final_prompt
+            power_color, final_status, color_back, rarity_card, status, rarity_status = full_power()
+            weapon_suf = weapon_type[0] + weapon_type[1]
+            display_none, display_block, display_flex, none = "display: none", "display: block", "display: flex", "none"
+            user = User.objects.get(pk=request.user.id)
+
+            cards = Card.objects.count()
+            serial = cards + 1
+
+            card = Card(
+                user=user,
+                name=weapon_name,
+                rarity=rarity_card,
+                image=byte_stream,
+                type=weapon_type,
+                status_card=status,
+                power=final_status,
+                description=final_prompt
+            )
+
+            serial_number_weapon = f"{weapon_suf}-{str(serial).zfill(6)}"
+            card.serial = serial_number_weapon
+            type_weapon = f"[{card.type} - {card.status_card}]"
+
+            card.save()
+
+            for data in rarity_status:
+                status_card = Status(
+                    card=card,
+                    rarity=data.get('rarity'),
+                    attribute=data.get('type'),
+                    stats=data.get('status')
+                )
+
+                status_card.save()
 
             context = {
+                'card': card,
                 'color_back': color_back,
                 'power_color': power_color,
-                'final_status': final_status,
                 'rarity_status': rarity_status,
-                'status': status,
-                'rarity_card': rarity_card,
                 'type_weapon': type_weapon,
-                'serial_number_weapon': serial_number_weapon,
-                'card_name': card_name,
                 'display_block': display_block,
                 'display_none': display_none,
                 'display_flex': display_flex,
                 'none': none,
-                'description': description,
                 'image_base64': image_base64,
             }
 

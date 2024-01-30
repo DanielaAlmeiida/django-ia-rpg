@@ -62,3 +62,13 @@ ul.nav-links {
 .language-item > img {
     width: 24px;
 }
+
+
+@media (max-width: 1100px) {
+    .logo, .language {
+        display: none;
+    }
+    header {
+        justify-content:  center;
+    }
+}
