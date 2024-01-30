@@ -1,5 +1,6 @@
 {% extends 'header.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}Forge{% endblock %}
 
@@ -44,7 +45,7 @@
     <main id="container" class="box">
         <section id="form">
             <div class="frame">
-                <form method="post" class="form-forge" id="form-forge" onsubmit="">
+                <form method="POST" class="form-forge" id="form-forge" onsubmit="">
                     {% csrf_token %}
                     <select id="weapon-type" name="weapon-type" required>
                         <option value="" class="option-disabled" disabled selected hidden>Select your weapon</option>
@@ -104,18 +105,18 @@
         </section>
 
         <section id="forge">
-            <div class="card-background" style="background-image: url('../static/content/frame-ores/{{ rarity_card }}.png'); animation: {{ none }};">
+            <div class="card-background" style="background-image: url('../static/content/frame-ores/{{ card.rarity }}.png'); animation: {{ none }};">
                 <div class="card">
                     <div class="card-header">
                         <h1  style="{{ display_none }}">Card name</h1>
-                        <h1>{{ card_name }}</h1>
+                        <h1>{{ card.name }}</h1>
                         <p class="" style="{{ display_none }}">
                             Opal
                             <img class="ore-icon" src="{% static 'content/img-ores/ore-Opal.png' %}">
                         </p>
                         <p class="card-rarity"  style="{{ display_block }}">
-                            {{ rarity_card }}
-                            <img class="ore-icon ore-icon-header" src="../static/content/img-ores/ore-{{ rarity_card }}.png">
+                            {{ card.rarity }}
+                            <img class="ore-icon ore-icon-header" src="../static/content/img-ores/ore-{{ card.rarity }}.png" style=" animation: {{ none }};">
                         </p>
                     </div>
                     <div class="card-img">
@@ -151,22 +152,21 @@
                                     <img class="star-icon" src="{% static 'content/img/star.png' %}">
                                 </div>
                                 <p style="{{ display_none }}" class="power-number">0000</p>
-                                <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ final_status }}</p>
+                                <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
                             </div>
                         </div>
                         <div class="card-description">
                             <p>
                                 <strong>Description:</strong>
                                 <small style="{{ display_none }}"> Explore the world of possibilities within a card.</small>
-                                {{ description }}
+                                {{ card.description }}
                             </p>
                         </div>
 
                         <div class="card-serie-number">
                             <p style="{{ display_none }}">WE-000.001</p>
-                            <p>{{ serial_number_weapon }}</p>
+                            <p>{{ card.serial }}</p>
                         </div>
-
                     </div>
                 </div>
             </div>
