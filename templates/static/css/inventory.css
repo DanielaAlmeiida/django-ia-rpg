@@ -1,0 +1,210 @@
+/* SECTION BEST CARD */
+.section-bestcard {
+    min-width: 40%;
+    background-color: var(--light-brown);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+    padding: 45px 0px 45px 0px;
+}
+
+.phrase {
+    font-size: 1.3rem;
+}
+
+/* SECTION INVENTORY */
+.section-inventory {
+    min-width: 60%;
+    background-color: var(--dark-brown);
+    display: flex;
+    align-items: center;
+}
+
+.inventory {
+    margin: 50px;
+}
+
+.inventory-header {
+    text-align: center;
+    padding: 30px;
+    font-size: 30px;
+    margin-left: 62px;
+    margin-bottom: -2px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #FFDC82;
+    text-align: center;
+}
+
+/* Borda */
+.inventory-header, .icon-filter, .inventory-cards {
+    border: 2px solid #553824;
+}
+
+/* Fundo cor */
+.inventory-header, .inventory-groupby, .inventory-orderby, .inventory-cards {
+    background-color: var(--light-brown);
+}
+
+
+.inventory-groupby, .inventory-orderby {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+
+}
+
+.inventory-groupby li {
+    margin-bottom: -2px;
+}
+
+.inventory-orderby li {
+    margin-top: -2px;
+}
+
+.inventory-filters {
+    max-width: 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.inventory-body {
+    height: 700px;
+}
+
+.icon-filter {
+    padding: 10px;
+    height: 40px;
+    width: 40px;
+    margin-right: -2px;
+    margin-bottom: -2px;
+}
+
+/* em botões
+.icon-filter {
+    padding: 30px;
+    height: 40px;
+    width: 40px;
+    margin-right: -2px;
+    margin-bottom: -2px;
+    cursor: url("../content/img/cursor.png"), pointer;
+    background-size: cover;
+    background-position: center;
+}
+
+.megazord {
+    background-image: url("../content/img/megazord.png");
+}
+
+.weapon {
+    background-image: url("../content/img/weapon.png");
+}
+
+.potion {
+    background-image: url("../content/img/potion.png");
+}
+
+.armor {
+    background-image: url("../content/img/armor.png");
+}
+
+.opal {
+    background-image: url("../content/img-ores/ore-Opal.png");
+}
+
+.star {
+    background-image: url("../content/img/star.png");
+}
+*/
+
+.inventory-body {
+    display: flex;
+    flex-direction: row;
+}
+
+.inventory-cards {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+ul.inventory-list-cards {
+    padding: 30px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 24px 24px;
+    overflow-y: auto;
+}
+
+li.inventory-card, .item-card-img {
+    width: 155px;
+}
+
+li.inventory-card {
+    background: var(--dark-brown);
+    box-shadow: 1px 1px 4.3px 2px #1c0f09;
+    height: 232px;
+}
+
+.inventory-card-title {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+.item-card-img {
+    height: auto;
+}
+
+.icon-ore {
+    height: 20px;
+}
+
+.item-card-power {
+    height: 18px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: -2px;
+}
+
+
+@media (max-width: 1000px) {
+    main {
+        flex-wrap: wrap;
+    }
+    .section-bestcard {
+        min-width: 100%;
+    }
+    .section-inventory {
+        min-width: 100%;
+    }
+}
+
+
+
+/*
+*::-webkit-scrollbar {
+  display: none;
+}
+*/
+
+*::-webkit-scrollbar {
+  width: 12px;               /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--light-brown);        /* color of the tracking area */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #493d20;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid var(--light-brown);  /* creates padding around scroll thumb */
+}

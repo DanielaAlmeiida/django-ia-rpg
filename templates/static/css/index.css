@@ -1,6 +1,4 @@
-#container {
-    height: calc(100vh - 80px);
-    display: flex;
+main {
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
@@ -66,182 +64,6 @@ option {
     background-color: var(--black) ;
 }
 
-
-/* SECTION Forge */
-#forge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-    gap: 50px;
-    color: black;
-}
-
-.card-background{
-    height: 700px;
-    width: 390px;
-    border-radius: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    background-size: cover;
-    animation: frameOreChange 20s ease-in-out infinite;
-}
-
-.card {
-    width: 360px;
-    height: 670px;
-    border-radius: 20px;
-    color: white;
-    background-color: var(--black);
-    /* opacity: 0.95; */
-    position: relative;
-}
-
-.generated-img, .card-img {
-    height: 360px;
-    width: 360px;
-}
-.card-img {
-    position: relative;
-    background-color: black;
-    animation: colorChange 20s linear infinite;
-}
-
-.generated-img {
-    display: none;
-}
-
-.card-img > small {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 150px;
-}
-
-.card-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 30px 10px 30px;
-}
-
-.card-header p {
-    align-items: center;
-}
-
-.card-rarity {
-    display: none;
-}
-
-.card-footer {
-   display: flex;
-   flex-direction: column;
-   gap: 22px;
-}
-
-.card-type-id {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 16px;
-}
-
-.status-and-power {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.card-power {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #60B2FF;
-    background: rgba(33, 140, 239, 0.12);
-    padding: 8px;
-}
-
-.card-power-title {
-    display: flex;
-    justify-content: center;
-}
-
-.star-icon {
-    height: 30px;
-}
-
-.power-title, .power-number {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, #60B2FF 64.5%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.power-title {
-    font-size: 20px;
-    line-height: normal;
-}
-
-.power-number {
-    font-size: 25px;
-    text-align: center;
-}
-
-ul.status-list-generated, ul.status-list  {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    height: 66px;
-    justify-content: start;
-    gap: 7px;
-}
-
-ul.status-list-generated {
-    display: none;
-}
-
-.status-and-power {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.status-and-power, .card-description {
-    margin: 0 20px 0 20px;
-}
-
-.card-description {
-    padding: 12px;
-    font-size: 12px;
-    background-color: #2C2C2C;
-    border-radius: 4px;
-    height: 80px;
-    text-align: justify;
-    line-height: 10pt;
-}
-
-.card-serie-number {
-    font-size: 8px;
-    margin-top: -15px;
-    text-align: center;
-}
-
-.ore-icon {
-    height: 15px;
-    margin-right: 2px;
-}
-
-.ore-icon-header {
-    margin-left: 8px
-}
-
-
-/* Textura dos minérios da borda da carta */
 @keyframes frameOreChange {
     0%, 12.5% {
         background-image: url("../content/frame-ores/Bronze.png");
@@ -298,7 +120,7 @@ ul.status-list-generated {
 
 
 @media (max-width: 1000px) {
-    #container {
+    main {
         flex-wrap: wrap;
         gap: 80px;
         padding: 42px;

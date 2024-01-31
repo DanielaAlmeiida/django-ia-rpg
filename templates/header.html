@@ -35,7 +35,10 @@
                 <ul class="nav-links">
                     <li><a class="link-select" href="">Home</a></li>
                     <li><a class="link-select" href="/generate">Forge</a></li>
-                    <li><a class="link-select link-selected" href="/login">Log in</a></li>
+                    <li><a class="link-select" href="">Ranking</a></li>
+                    <li><a class="link-select" href="/inventory">Inventory</a></li> <!-- Adicionar para usuários logados -->
+                    <li><a class="link-select" href="">Username-BR</a></li> <!-- Adicionar para usuários logados --> <!-- Fazer modal EDIT PROFILE e LOGOUT-->
+                    <li><a class="link-select link-selected" href="/login">Log in</a></li> <!-- Retirar Login quando user está logado -->
                     <li>
                         <form method="POST" action="{% url 'logout' %}" class="link-select">
                             {% csrf_token %}

@@ -1,6 +1,6 @@
 header {
-    border-bottom: 1px solid #FFDC82;
-    background-color: #211919; /* Marrom header */
+    border-bottom: 1px solid var(--yellow);
+    background-color: var(--light-brown);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -22,12 +22,17 @@ small {
 
 ul {
     display: flex;
-    gap: 50px;
+    gap: 8px;
 }
 
 .logo {
-   display: flex;
-   gap: 10px;
+    display: flex;
+    gap: 10px;
+    min-width: 202px;
+}
+
+div.language ul {
+    min-width: 127px;
 }
 
 div.language, .logo, a {

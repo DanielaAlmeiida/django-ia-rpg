@@ -4,6 +4,8 @@
   --black: #151515;
   --bright-yellow: #FFD15C;
   --border-yellow: #a19168;
+  --dark-brown: #0E0808;
+  --light-brown: #211919;
 }
 
 
@@ -21,6 +23,13 @@ body {
     background-image: url("../content/img/main-background.jpg");
     background-size: cover;
     color: var(--yellow);
+    cursor: url("../content/img/cursor2.png"), auto;
+    cursor: url("../content/img/cursor2.png"), pointer;
+}
+
+main {
+    height: calc(100vh - 80px);
+    display: flex;
 }
 
 
@@ -53,7 +62,6 @@ strong {
 
 h1, h2, h3, h4, h5, h6 {
     text-transform: capitalize;
-    font-size: large;
 }
 
 

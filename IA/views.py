@@ -20,6 +20,9 @@ import requests
 
 from IA.models import Card, Status
 
+def inventory(request):
+    if request.method == 'GET':
+        return render(request, 'inventory.html')
 
 def cadastro(request):
     if request.method == 'GET':
