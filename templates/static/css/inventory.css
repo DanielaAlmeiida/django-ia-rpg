@@ -55,7 +55,7 @@ h2 {
     display: flex;
     flex-direction: column;
     gap: 0px;
-
+    margin-bottom: 2px;
 }
 
 .inventory-groupby li {
@@ -75,17 +75,9 @@ h2 {
 
 .inventory-body {
     height: 700px;
+    min-width: 52vw;
 }
 
-.icon-filter {
-    padding: 10px;
-    height: 40px;
-    width: 40px;
-    margin-right: -2px;
-    margin-bottom: -2px;
-}
-
-/* em botões
 .icon-filter {
     padding: 30px;
     height: 40px;
@@ -93,7 +85,8 @@ h2 {
     margin-right: -2px;
     margin-bottom: -2px;
     cursor: url("../content/img/cursor.png"), pointer;
-    background-size: cover;
+    background-repeat: no-repeat;
+    background-size: 40px;
     background-position: center;
 }
 
@@ -120,7 +113,7 @@ h2 {
 .star {
     background-image: url("../content/img/star.png");
 }
-*/
+
 
 .inventory-body {
     display: flex;
@@ -185,8 +178,10 @@ li.inventory-card {
     .section-inventory {
         min-width: 100%;
     }
+    .inventory-body {
+        min-width: 85vw;
+    }
 }
-
 
 
 /*
@@ -208,3 +203,4 @@ li.inventory-card {
   border-radius: 20px;       /* roundness of the scroll thumb */
   border: 3px solid var(--light-brown);  /* creates padding around scroll thumb */
 }
+

@@ -77,3 +77,30 @@ ul.nav-links {
         justify-content:  center;
     }
 }
+
+
+.username-dropdown {
+    display: none;
+        position: absolute;
+
+}
+
+.username:hover + .username-dropdown{
+    display: flex;
+    position: absolute;
+    margin-top: 30px;
+    padding: 15px;
+    gap: 12px;
+    background: var(--light-brown);
+    width: 136px;
+    height: auto;
+    border: 1px solid var(--yellow);
+    flex-direction: column;
+    display: block;
+}
+
+
+.temporary-img {
+    width: 10px;
+}
+

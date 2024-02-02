@@ -1,12 +1,12 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-class Card(models.Model):
 
+class Card(models.Model):
     class OptionsCategory(models.TextChoices):
-        OPTION1 = 'Weapon'
-        OPTION2 = 'Potion'
-        OPTION3 = 'Armor'
+        OPTION1 = 'Weapons'
+        OPTION2 = 'Potions'
+        OPTION3 = 'Armors'
 
     class OptionsType(models.TextChoices):
         OPTION1 = 'Sword'
@@ -31,7 +31,7 @@ class Card(models.Model):
     category = models.CharField(max_length=20, choices=OptionsCategory.choices, default="Weapons")
     name = models.CharField(max_length=30)
     rarity = models.CharField(max_length=20, choices=OptionsRarity.choices)
-    image = models.CharField(max_length=50, default="default.png")
+    image = models.BinaryField()
     type = models.CharField(max_length=20, choices=OptionsType.choices)
     status_card = models.IntegerField()
     power = models.IntegerField()
@@ -68,11 +68,11 @@ class Status(models.Model):
 
 
 '''class Card(models.Model):
-    
+
     Options_category = [(option.value, option.name) for option in OptionsCategory]
     Options_type = [(option.value, option.name) for option in OptionsType]
     Options_rarity = [(option.value, option.name) for option in OptionsRarity]
-    
+
     id = models.AutoField(primary_key=True)
     category = models.CharField(max_length=20, choices=Options_category)
     name = models.CharField(max_length=30)
@@ -81,7 +81,7 @@ class Status(models.Model):
     status_card = models.IntegerField(max_digits=5)
     power = models.IntegerField(max_digits=5)
     description = models.TextField()
-    
+
     def __str__(self):
         return {self.name}, {self.category}, {self.type}, {self.rarity}, {self.description}'''
 

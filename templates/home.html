@@ -1,0 +1,30 @@
+{% extends 'header.html' %}
+{% load static %}
+
+{% block title %}RPG Forger | Home{% endblock %}
+
+{% block content %}
+    <head>
+        {{ block.super }}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+
+        </script>
+    </head>
+
+    <main>
+        <section class="section1">
+            <img src="{% static 'content/img/icon.png' %}" alt="Logo image">
+            <h2>You can create MULTIPLE different and UNIQUE CARDS!</h2>
+        </section>
+        <section class="section2">
+            <h1>Make your card collections!</h1>
+            <a class="btn-main " href="/login">CREATE ACCOUNT</a>
+        </section>
+        <section class="section3">
+            <img src="{% static 'content/img/sw0001.png' %}" alt="Logo image">
+            <h2>You can create MULTIPLE different and UNIQUE CARDS!</h2>
+        </section>
+    </main>
+{% endblock %}

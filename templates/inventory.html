@@ -4,386 +4,189 @@
 {% block title %}Inventory{% endblock %}
 
 {% block content %}
-    <head>
-        {{ block.super }}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/card-style.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/inventory.css' %}">
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-        </script>
 
-    </head>
+<head>
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/card-style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/inventory.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Manipula o clique nos botões de filtro
+            $('.filter-button').click(function () {
+                var filterValue = $(this).data('filter');
 
-    <main>
-        <section class="section-bestcard">
-            <p class="phrase">Your best card is:</p>
-               <section  class="bestcard">
-                    <div class="card-background" style="background-image: url('../static/content/frame-ores/{{ card.rarity }}.png'); animation: {{ none }};">
-                        <div class="card">
-                            <div class="card-header">
-                                <h1  style="{{ display_none }}">Card name</h1>
-                                <h1>{{ card.name }}</h1>
-                                <p class="" style="{{ display_none }}">
-                                    Opal
-                                    <img class="ore-icon" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </p>
-                                <p class="card-rarity"  style="{{ display_block }}">
-                                    {{ card.rarity }}
-                                    <img class="ore-icon ore-icon-header" src="../static/content/img-ores/ore-{{ card.rarity }}.png" style=" animation: {{ none }};">
-                                </p>
-                            </div>
-                            <div class="card-img">
-                                <img class="generated-img" style="{{ display_block }}" src="data:image/png;base64,{{ image_base64 }}" alt="Generated image">
-                                <small style="{{ display_none }}">?</small>
-                            </div>
-                            <div class="card-footer">
-                                <div class="card-type-id">
-                                    <p style="{{ display_none }}">[Weapon - 250]</p>
-                                    <p>{{ type_weapon }}</p>
-                                </div>
-                                <div class="status-and-power">
-                                    <ul class="status-list-generated" style="{{ display_flex }}">
-                                         {% for data in rarity_status %}
-                                            <li>
-                                                <img class="ore-icon" src="{% static 'content/img-ores/ore-'|add:data.rarity|add:'.png' %}">
-                                                {{ data.type }} - {{ data.status }}
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                    <ul class="status-list"  style="{{ display_none }}">
-                                        <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Opal.png' %}"> STR - ?</li>
-                                        <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Emerald.png' %}"> VIT - ?</li>
-                                        <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Gold.png' %}"> AGI - ?</li>
-                                        <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Ruby.png' %}"> RES - ?</li>
-                                        <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Silver.png' %}"> LUC - ?</li>
-                                        <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Obsidian.png' %}"> INT - ?</li>
-                                    </ul>
-                                    <div class="card-power" style="background: rgba({{ power_color }} 0.12); border: 1px solid {{ color_back }};">
-                                        <div class="card-power-title">
-                                            <h2 class="power-title" style="
-                                                    background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Power</h2>
-                                            <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        </div>
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-                                </div>
-                                <div class="card-description">
-                                    <p>
-                                        <strong>Description:</strong>
-                                        <small style="{{ display_none }}"> Explore the world of possibilities within a card.</small>
-                                        {{ card.description }}
-                                    </p>
-                                </div>
+                // Envia uma requisição AJAX para a view Django com o filtro selecionado
+                $.ajax({
+                    url: '/inventory/filter_' + filterValue,  // Substitua pela URL da sua view Django
+                    type: 'GET',
+                    data: {filter: filterValue},
+                    success: function () {
+                        // Atualiza a lista de cards filtrados na div 'inventory-list-cards'
+                        window.location.href = '/inventory/filter_' + filterValue;
+                    },
+                    error: function () {
+                        alert('Erro ao carregar os cards filtrados.');
+                    }
+                });
+            });
+        });
 
-                                <div class="card-serie-number">
-                                    <p style="{{ display_none }}">WE-000.001</p>
-                                    <p>{{ card.serial }}</p>
+    </script>
+</head>
+<main>
+    <section class="section-bestcard">
+        <p class="phrase">Your best card is:</p>
+        <section class="bestcard">
+            <div class="card-background"
+                 style="background-image: url('../static/content/frame-ores/{{ card.rarity }}.png'); animation: {{ none }};">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 style="{{ display_none }}">Card name</h1>
+                        <h1>{{ card.name }}</h1>
+                        <p class="" style="{{ display_none }}">
+                            Opal
+                            <img class="ore-icon" src="{% static 'content/img-ores/ore-Opal.png' %}">
+                        </p>
+                        <p class="card-rarity" style="{{ display_block }}">
+                            {{ card.rarity }}
+                            <img class="ore-icon ore-icon-header"
+                                 src="../static/content/img-ores/ore-{{ card.rarity }}.png"
+                                 style=" animation: {{ none }};">
+                        </p>
+                    </div>
+                    <div class="card-img">
+                        <img class="generated-img" style="{{ display_block }}"
+                             src="data:image/png;base64,{{ image_base64 }}" alt="Generated image">
+                        <small style="{{ display_none }}">?</small>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-type-id">
+                            <p style="{{ display_none }}">[Weapon - 250]</p>
+                            <p>{{ type_weapon }}</p>
+                        </div>
+                        <div class="status-and-power">
+                            <ul class="status-list-generated" style="{{ display_flex }}">
+                                {% for data in rarity_status %}
+                                <li>
+                                    <img class="ore-icon"
+                                         src="{% static 'content/img-ores/ore-'|add:data.rarity|add:'.png' %}">
+                                    {{ data.type }} - {{ data.status }}
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            <ul class="status-list" style="{{ display_none }}">
+                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Opal.png' %}"> STR - ?
+                                </li>
+                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Emerald.png' %}"> VIT - ?
+                                </li>
+                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Gold.png' %}"> AGI - ?
+                                </li>
+                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Ruby.png' %}"> RES - ?
+                                </li>
+                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Silver.png' %}"> LUC - ?
+                                </li>
+                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Obsidian.png' %}"> INT -
+                                    ?
+                                </li>
+                            </ul>
+                            <div class="card-power"
+                                 style="background: rgba({{ power_color }} 0.12); border: 1px solid {{ color_back }};">
+                                <div class="card-power-title">
+                                    <h2 class="power-title" style="
+                                                    background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                        Power</h2>
+                                    <img class="star-icon" src="{% static 'content/img/star.png' %}">
                                 </div>
+                                <p style="{{ display_none }}" class="power-number">0000</p>
+                                <p class="power-number"
+                                   style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                    {{ card.power }}</p>
                             </div>
                         </div>
-                    </div>
-               </section>
-            </div>
-            <p class="phrase">Congratulations!</p>
-        </section>
+                        <div class="card-description">
+                            <p>
+                                <strong>Description:</strong>
+                                <small style="{{ display_none }}"> Explore the world of possibilities within a
+                                    card.</small>
+                                {{ card.description }}
+                            </p>
+                        </div>
 
-        <section class="section-inventory">
-            <div class="inventory">
-                <div class="inventory-header">
-                    <h2>Inventory</h2>
-                </div>
-                <div class="inventory-body">
-                    <div class="inventory-filters">
-                        <ul class="inventory-groupby">
-                            <li> <img class="icon-filter" src="{% static 'content/img/megazord.png' %}"> </li>
-                            <li> <img class="icon-filter" src="{% static 'content/img/weapon.png' %}"> </li>
-                            <li> <img class="icon-filter" src="{% static 'content/img/potion.png' %}"> </li>
-                            <li> <img class="icon-filter" src="{% static 'content/img/armor.png' %}"> </li>
-                        </ul>
-                        <ul class="inventory-orderby">
-                            <li> <img class="icon-filter" src="{% static 'content/img-ores/ore-Opal.png' %}"> </li>
-                            <li> <img class="icon-filter" src="{% static 'content/img/star.png' %}"> </li>
-                        </ul>
-                    </div>
-                    <!-- em botões
-                    <div class="inventory-filters">
-                        <ul class="inventory-groupby">
-                            <li><button class="icon-filter megazord"></button></li>
-                            <li><button class="icon-filter weapon"></button></li>
-                            <li><button class="icon-filter potion"></button></li>
-                            <li><button class="icon-filter armor"></button></li>
-                        </ul>
-                        <ul class="inventory-orderby">
-                            <li><button class="icon-filter opal"></button></li>
-                            <li><button class="icon-filter star"></button></li>
-                        </ul>
-                    </div>
-                    -->
-                    <div class="inventory-cards">
-                        <ul class="inventory-list-cards">
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/sw0001.png' %}">
-                                <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                    <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                    <p style="{{ display_none }}" class="power-number">0000</p>
-                                    <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                </div>
-                            </li>
-
-
-
-
-                            <!-- mais cartas, apagar-->
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/sw0001.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/sw0001.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <!-- copiado -->
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                            <li class="inventory-card">
-                                <div class="inventory-card-title">
-                                    <h3> Card name </h3>
-                                    <img class="icon-ore" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                                </div>
-                                <img class="item-card-img" src="{% static 'content/img/Forja.png' %}">
-
-                                    <div class="card-power item-card-power" style="background: rgba({{ power_color }} 0.12);">
-                                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                        <p style="{{ display_none }}" class="power-number">0000</p>
-                                        <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
-                                    </div>
-
-                            </li>
-                        </ul>
+                        <div class="card-serie-number">
+                            <p style="{{ display_none }}">WE-000.001</p>
+                            <p>{{ card.serial }}</p>
+                        </div>
                     </div>
                 </div>
-
             </div>
         </section>
-    </main>
+        </div>
+        <p class="phrase">Congratulations!</p>
+    </section>
+
+    <section class="section-inventory">
+        <div class="inventory">
+
+            <div class="inventory-header">
+                <h2>Inventory</h2>
+            </div>
+            <div class="inventory-body">
+                <div class="inventory-filters">
+                    <ul class="inventory-groupby">
+                        <li>
+                            <button class="icon-filter filter-button megazord" data-filter="all"></button>
+                        </li>
+                        <li>
+                            <button class="icon-filter filter-button weapon" data-filter="weapon"></button>
+                        </li>
+                        <li>
+                            <button class="icon-filter filter-button potion" data-filter="potion"></button>
+                        </li>
+                        <li>
+                            <button class="icon-filter filter-button armor" data-filter="armor"></button>
+                        </li>
+                    </ul>
+                    <ul class="inventory-orderby">
+                        <li>
+                            <button class="icon-filter opal"></button>
+                        </li>
+                        <li>
+                            <button class="icon-filter star"></button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="inventory-cards">
+                    <ul class="inventory-list-cards">
+
+                        {% for card_data in card_data_list %}
+                        {% with image_base64=card_data.image_base64 %}
+
+                        <li class="inventory-card">
+                            <div class="inventory-card-title">
+                                <h3>{{ card_data.name }}</h3>
+                                <img class="icon-ore"
+                                     src="{% static 'content/img-ores/ore-'|add:card_data.rarity|add:'.png' %}">
+                            </div>
+                            <img class="item-card-img" src="data:image/jpeg;base64,{{ image_base64 }}">
+                            <div class="card-power item-card-power"
+                                 style="background: rgba({{ card_data.power_color }} 0.12);">
+                                <img class="star-icon" src="{% static 'content/img/star.png' %}">
+                                <p class="power-number"
+                                   style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ card_data.back_color }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                    {{ card_data.power }}</p>
+                            </div>
+                        </li>
+
+                        {% endwith %}
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</main>
 {% endblock %}
-

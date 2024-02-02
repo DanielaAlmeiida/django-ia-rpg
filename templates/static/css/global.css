@@ -37,7 +37,6 @@ main {
 .btn-main {
     color: #150F0F;
     background: linear-gradient(270deg, #DF8D13 0.01%, #FFCD6B 93.53%);
-    box-shadow: 5px 6px 4px 0px rgba(169, 154, 115, 0.72);
     padding: 8px 40px 8px 40px;
     font-size: 20px;
     border: none;
@@ -47,7 +46,9 @@ main {
 .btn-main:hover {
     color: black;
     background: linear-gradient(270deg, #C97F0F 0.01%, #EAB245 93.53%);
-    box-shadow: 5px 6px 4px 0px rgba(169, 154, 115, 0.72);
+-webkit-box-shadow:0px 0px 12px 1px rgba(255,230,168,0.9);
+-moz-box-shadow: 0px 0px 12px 1px rgba(255,230,168,0.9);
+box-shadow: 0px 0px 12px 1px rgba(255,230,168,0.9);
 }
 
 a:hover {
