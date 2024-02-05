@@ -66,6 +66,8 @@ class Status(models.Model):
     attribute = models.CharField(max_length=10, choices=OptionsStatus.choices)
     stats = models.IntegerField()
 
+    objects = models.Manager()
+
 
 '''class Card(models.Model):
 

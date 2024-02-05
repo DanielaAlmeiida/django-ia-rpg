@@ -134,17 +134,17 @@ ul.inventory-list-cards {
     overflow-y: auto;
 }
 
-li.inventory-card, .item-card-img {
+li.mini-card, .item-card-img {
     width: 155px;
 }
 
-li.inventory-card {
+li.mini-card {
     background: var(--dark-brown);
     box-shadow: 1px 1px 4.3px 2px #1c0f09;
     height: 232px;
 }
 
-.inventory-card-title {
+.mini-card-title {
     display: flex;
     flex-direction: row;
     padding: 10px;

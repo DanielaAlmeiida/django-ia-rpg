@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% load static %}
+
+{% with image_base64=card.image_base64 %}
+<li class="mini-card">
+    <div class="mini-card-title">
+        <h3>{{ card.name }}</h3>
+        <img class="icon-ore"
+             src="{% static 'content/img-ores/ore-'|add:card.rarity|add:'.png' %}">
+    </div>
+    <img class="item-card-img" src="data:image/jpeg;base64,{{ image_base64 }}">
+    <div class="card-power item-card-power"
+         style="background: rgba({{ card.power_color }} 0.12);">
+        <img class="star-icon" src="{% static 'content/img/star.png' %}">
+        <p class="power-number"
+           style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ card.back_color }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            {{ card.power }}</p>
+    </div>
+</li>
+{% endwith %}

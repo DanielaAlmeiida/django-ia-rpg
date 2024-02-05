@@ -6,14 +6,89 @@
 {% block content %}
     <head>
         {{ block.super }}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/ranking.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/card-style.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/inventory.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/big-card-template.css' %}">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
+        $(document).ready(function () {
+            // Manipula o clique nos botões de filtro
+            $('.filter-button').click(function () {
+                var filterValue = $(this).data('filter');
 
+                // Envia uma requisição AJAX para a view Django com o filtro selecionado
+                $.ajax({
+                    url: '/ranking/filter_'+ filterValue,  // Substitua pela URL da sua view Django
+                    type: 'GET',
+                    data: {filter: filterValue},
+                    success: function () {
+                        // Atualiza a lista de cards filtrados na div 'inventory-list-cards'
+                        window.location.href = '/ranking/filter_' + filterValue;
+                    },
+                    error: function () {
+                        alert('Erro ao carregar os cards filtrados.');
+                    }
+                });
+            });
+        });
         </script>
     </head>
 
     <main>
+        <div>
+            <h2>Ranking</h2>
+            <ul class="filters">
+                <li>
+                    <button class="icon-filter filter-button power" data-filter="power"></button>
+                </li>
+                <li>
+                    <button class="icon-filter filter-button weapon" data-filter="weapon"></button>
+                </li>
+                <li>
+                    <button class="icon-filter filter-button potion" data-filter="potion"></button>
+                </li>
+                <li>
+                    <button class="icon-filter filter-button armor" data-filter="armor"></button>
+                </li>
+                <li>
+                    <button class="icon-filter filter-button ore" data-filter="ore"></button>
+                </li>
+            </ul>
+        </div>
+   <section class="ranking-list">
+       <div class="ranking-best-cards">
+           {% for card in ranking_list %}
+                {% if forloop.counter == 1 %}
+                    <div class="ranking_card second-card">
+                        <img class="crown" src="{% static 'content/img/second-crown.png' %}">
+                        {% include 'big_card_template.html' with card=ranking_list.1 %}
+                    </div>
+                {% elif forloop.counter == 2 %}
+                    <div class="ranking_card first-card">
+                        <img class="crown" src="{% static 'content/img/first-crown.png' %}">
+                        {% include 'big_card_template.html' with card=ranking_list.0 %}
+                    </div>
+                {% elif forloop.counter == 3 %}
+                    <div class="ranking_card third-card">
+                        <img class="crown" src="{% static 'content/img/third-crown.png' %}">
+                        {% include 'big_card_template.html' with card=card %}
+                    </div>
+                {% endif %}
+           {% endfor %}
+       </div>
+
+       <div class="ranking-list-cards">
+            {% for card in ranking_list %}
+                {% if forloop.counter > 3 %}
+                    <div class="ranking_card">
+                        {% include 'mini_card_template.html' with card=card %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+       </div>
+
+    </section>
 
     </main>
 {% endblock %}

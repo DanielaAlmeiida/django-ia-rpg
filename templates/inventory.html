@@ -13,7 +13,8 @@
     <script>
         $(document).ready(function () {
             // Manipula o clique nos botões de filtro
-            $('.filter-button').click(function () {
+            $('.filter-button').click(function (e) {
+                e.preventDefault();
                 var filterValue = $(this).data('filter');
 
                 // Envia uma requisição AJAX para a view Django com o filtro selecionado
@@ -21,9 +22,12 @@
                     url: '/inventory/filter_' + filterValue,  // Substitua pela URL da sua view Django
                     type: 'GET',
                     data: {filter: filterValue},
+
                     success: function () {
                         // Atualiza a lista de cards filtrados na div 'inventory-list-cards'
                         window.location.href = '/inventory/filter_' + filterValue;
+                        //$('.inventory-list-cards').html(data);
+
                     },
                     error: function () {
                         alert('Erro ao carregar os cards filtrados.');
@@ -160,26 +164,12 @@
                 <div class="inventory-cards">
                     <ul class="inventory-list-cards">
 
-                        {% for card_data in card_data_list %}
-                        {% with image_base64=card_data.image_base64 %}
+                        {% for card in card_data_list %}
+                            {% with image_base64=card.image_base64 %}
 
-                        <li class="inventory-card">
-                            <div class="inventory-card-title">
-                                <h3>{{ card_data.name }}</h3>
-                                <img class="icon-ore"
-                                     src="{% static 'content/img-ores/ore-'|add:card_data.rarity|add:'.png' %}">
-                            </div>
-                            <img class="item-card-img" src="data:image/jpeg;base64,{{ image_base64 }}">
-                            <div class="card-power item-card-power"
-                                 style="background: rgba({{ card_data.power_color }} 0.12);">
-                                <img class="star-icon" src="{% static 'content/img/star.png' %}">
-                                <p class="power-number"
-                                   style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ card_data.back_color }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                                    {{ card_data.power }}</p>
-                            </div>
-                        </li>
+                            {% include 'mini_card_template.html' with card=card %}
 
-                        {% endwith %}
+                            {% endwith %}
                         {% endfor %}
 
                     </ul>

@@ -1,3 +1,82 @@
 .status-and-power {
-    display: block;
+    font-size: 10px;
+}
+
+.card-power {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.power-title {
+    display: none;
+}
+.power-number {
+    font-size: 20px;
+}
+
+.status-and-power {
+    margin: 0px 5px 0px 10px;
+}
+
+.card-footer {
+    gap: 13px;
+}
+
+.card-serie-number {
+    margin-top: 3px;
+}
+
+/* FIRST CARD */
+.first-card .card {
+    width: 328px;
+    height: 555px;
+}
+
+.first-card .card-background {
+    width: 348px;
+    height: 577px;
+}
+
+.first-card .generated-img, .first-card .card-img {
+    width: 328px;
+    height: auto;
+}
+
+
+/* SECOND CARD */
+.second-card .card {
+    width: 291px;
+    height: 467px;
+}
+
+.second-card .card-background {
+    width: 313px;
+    height: 490px;
+}
+
+.second-card .generated-img, .second-card .card-img {
+    width: 291px;
+    height: auto;
+}
+
+/* THIRD CARD */
+.third-card .card-background {
+    width: 239px;
+    height: 389px;
+}
+
+.third-card .card {
+    width: 223px;
+    height: 368px;
+}
+
+.third-card .generated-img, .third-card .card-img {
+    width: 223px;
+    height: auto;
+}
+
+.third-card .card-footer {
+    gap: 3px;
+    font-size: 12px;
 }

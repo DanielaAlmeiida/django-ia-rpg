@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% load static %}
+
+{% with image_base64=card.image_base64 %}
+{% with status=card.status %}
+
+<div class="card-background" style="background-image: url('{% static 'content/frame-ores/'|add:card.rarity|add:'.png' %} '); animation: {{ none }};">
+    <div class="card">
+        <div class="card-header">
+            <h1>{{ card.name }}</h1>
+            <p class="card-rarity"  style="display: block">
+                {{ card.rarity }}
+                <img class="ore-icon ore-icon-header" src="{% static 'content/img-ores/ore-'|add:card.rarity|add:'.png' %}" style=" animation: {{ none }};">
+            </p>
+        </div>
+        <div class="card-img">
+            <img class="generated-img" style="display: block" src="data:image/png;base64,{{ image_base64 }}" alt="Generated image">
+        </div>
+        <div class="card-footer">
+            <div class="card-type-id">
+                <p>[ {{ card.type }} - {{ card.status_card }} ]</p>
+            </div>
+            <div class="status-and-power">
+                <ul class="status-list-generated" style="display: flex">
+                     {% for s in status %}
+                        <li>
+                            <img class="ore-icon" src="{% static 'content/img-ores/ore-'|add:s.rarity|add:'.png' %}">
+                            {{ s.attribute }} - {{ s.stats }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="card-power" style="background: rgba({{ card.power_color }} 0.12); border: 1px solid {{ card.back_color }};">
+                    <div class="card-power-title">
+                        <h2 class="power-title" style="
+                                background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ card.back_color }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Power</h2>
+                        <img class="star-icon" src="{% static 'content/img/star.png' %}">
+                    </div>
+                    <p class="power-number" style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ card.back_color }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">{{ card.power }}</p>
+                </div>
+            </div>
+
+            <div class="card-serie-number">
+                <p>{{ card.serial }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endwith %}
+{% endwith %}

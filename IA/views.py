@@ -4,7 +4,6 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 
-from django.http import JsonResponse, request
 from django.http import HttpResponse
 
 from IA.full_power import full_power
@@ -22,10 +21,6 @@ import requests
 from IA.models import Card, Status
 from IA.full_power_inventory import full_power_inventory
 
-
-def home(request):
-    if request.method == 'GET':
-        return render(request, 'home.html')
 
 def cadastro(request):
     if request.method == 'GET':
@@ -65,6 +60,11 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect("/generate/")
+
+
+def home(request):
+    if request.method == 'GET':
+        return render(request, 'home.html')
 
 
 @login_required(login_url='/login/')
@@ -178,8 +178,7 @@ def generate_image(request):
     return render(request, 'index.html')
 
 
-
-def inventory(request):
+def filter_cards_by_category(request):
     filter_value = request.GET.get('filter', 'all')
 
     if filter_value == 'weapon':
@@ -191,11 +190,13 @@ def inventory(request):
     else:
         return filter_cards_by_category(request, 'all')
 
-def filter_cards_by_category(request, category):
+
+def inventory(request, category):
+    user = User.objects.get(pk=request.user.id)
     if category == 'all':
-        cards = Card.objects.all()
+        cards = Card.objects.filter(user=user).order_by('power').reverse()
     else:
-        cards = Card.objects.filter(category=category)
+        cards = Card.objects.filter(user=user, category=category)
 
     card_data = []
     for card in cards:
@@ -216,3 +217,37 @@ def filter_cards_by_category(request, category):
     }
 
     return render(request, 'inventory.html', context)
+
+
+def ranking(request, category):
+    user = User.objects.get(pk=request.user.id)
+    if category == 'all':
+        cards = Card.objects.filter(user=user).order_by('power').reverse()
+    else:
+        cards = Card.objects.filter(user=user, category=category).order_by('power').reverse()
+
+    card_data = []
+    for card in cards:
+        status = Status.objects.filter(card=card)
+        power_color, back_color = full_power_inventory(card.power)
+        byte_stream = card.image
+        image_base64 = base64.b64encode(byte_stream).decode('utf-8')
+
+        card_data.append({
+            'name': card.name,
+            'rarity': card.rarity,
+            'image_base64': image_base64,
+            'type': card.type,
+            'status_card': card.status_card,
+            'power_color': power_color,
+            'back_color': back_color,
+            'power': card.power,
+            'serial': card.serial,
+            'status': status,
+        })
+
+    context = {
+        'ranking_list': card_data,
+    }
+
+    return render(request, 'ranking.html', context)
