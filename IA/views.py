@@ -198,6 +198,10 @@ def inventory(request, category):
     else:
         cards = Card.objects.filter(user=user, category=category)
 
+    best_card = Card.objects.filter(user=user).order_by('power').reverse().first()
+    status = Status.objects.filter(card=best_card)
+    best_byte_stream = best_card.image
+    best_image_base64 = base64.b64encode(best_byte_stream).decode('utf-8')
     card_data = []
     for card in cards:
         power_color, back_color = full_power_inventory(card.power)
@@ -214,6 +218,9 @@ def inventory(request, category):
 
     context = {
         'card_data_list': card_data,
+        'best_card': best_card,
+        'status': status,
+        'best_image_base64': best_image_base64
     }
 
     return render(request, 'inventory.html', context)

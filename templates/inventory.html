@@ -1,10 +1,10 @@
 {% extends 'header.html' %}
 {% load static %}
 
+
 {% block title %}Inventory{% endblock %}
 
 {% block content %}
-
 <head>
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static 'css/card-style.css' %}">
@@ -43,56 +43,35 @@
         <p class="phrase">Your best card is:</p>
         <section class="bestcard">
             <div class="card-background"
-                 style="background-image: url('../static/content/frame-ores/{{ card.rarity }}.png'); animation: {{ none }};">
+                 style="background-image: url('{% static 'content/frame-ores/'|add:best_card.rarity|add:'.png' %} ');; animation: {{ none }};">
                 <div class="card">
                     <div class="card-header">
-                        <h1 style="{{ display_none }}">Card name</h1>
-                        <h1>{{ card.name }}</h1>
-                        <p class="" style="{{ display_none }}">
-                            Opal
-                            <img class="ore-icon" src="{% static 'content/img-ores/ore-Opal.png' %}">
-                        </p>
-                        <p class="card-rarity" style="{{ display_block }}">
-                            {{ card.rarity }}
+                        <h1>{{ best_card.name }}</h1>
+
+                        <p class="card-rarity" style="display: block">
+                            {{ best_card.rarity }}
                             <img class="ore-icon ore-icon-header"
-                                 src="../static/content/img-ores/ore-{{ card.rarity }}.png"
+                                 src="{% static 'content/img-ores/ore-'|add:best_card.rarity|add:'.png '%}"
                                  style=" animation: {{ none }};">
                         </p>
                     </div>
                     <div class="card-img">
-                        <img class="generated-img" style="{{ display_block }}"
-                             src="data:image/png;base64,{{ image_base64 }}" alt="Generated image">
-                        <small style="{{ display_none }}">?</small>
+                        <img class="generated-img" style="display: block"
+                             src="data:image/png;base64,{{ best_image_base64 }}" alt="Generated image">
                     </div>
                     <div class="card-footer">
                         <div class="card-type-id">
-                            <p style="{{ display_none }}">[Weapon - 250]</p>
-                            <p>{{ type_weapon }}</p>
+                            <p>[ {{ best_card.type }} - {{ best_card.status_card }} ]</p>
                         </div>
                         <div class="status-and-power">
-                            <ul class="status-list-generated" style="{{ display_flex }}">
-                                {% for data in rarity_status %}
+                            <ul class="status-list-generated" style="display: flex">
+                                {% for s in status %}
                                 <li>
                                     <img class="ore-icon"
-                                         src="{% static 'content/img-ores/ore-'|add:data.rarity|add:'.png' %}">
-                                    {{ data.type }} - {{ data.status }}
+                                         src="{% static 'content/img-ores/ore-'|add:s.rarity|add:'.png' %}">
+                                    {{ s.attribute }} - {{ s.stats }}
                                 </li>
                                 {% endfor %}
-                            </ul>
-                            <ul class="status-list" style="{{ display_none }}">
-                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Opal.png' %}"> STR - ?
-                                </li>
-                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Emerald.png' %}"> VIT - ?
-                                </li>
-                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Gold.png' %}"> AGI - ?
-                                </li>
-                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Ruby.png' %}"> RES - ?
-                                </li>
-                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Silver.png' %}"> LUC - ?
-                                </li>
-                                <li><img class="ore-icon" src="{% static 'content/img-ores/ore-Obsidian.png' %}"> INT -
-                                    ?
-                                </li>
                             </ul>
                             <div class="card-power"
                                  style="background: rgba({{ power_color }} 0.12); border: 1px solid {{ color_back }};">
@@ -102,24 +81,20 @@
                                         Power</h2>
                                     <img class="star-icon" src="{% static 'content/img/star.png' %}">
                                 </div>
-                                <p style="{{ display_none }}" class="power-number">0000</p>
                                 <p class="power-number"
                                    style="background: linear-gradient(180deg, rgba(255, 255, 255, 0.91) 0%, {{ color_back }} 64.5%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                                    {{ card.power }}</p>
+                                    {{ best_card.power  }}</p>
                             </div>
                         </div>
                         <div class="card-description">
                             <p>
                                 <strong>Description:</strong>
-                                <small style="{{ display_none }}"> Explore the world of possibilities within a
-                                    card.</small>
-                                {{ card.description }}
+                                {{ best_card.description }}
                             </p>
                         </div>
 
                         <div class="card-serie-number">
-                            <p style="{{ display_none }}">WE-000.001</p>
-                            <p>{{ card.serial }}</p>
+                            <p>{{ best_card.serial }}</p>
                         </div>
                     </div>
                 </div>

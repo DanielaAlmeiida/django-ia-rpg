@@ -49,8 +49,18 @@ ul.nav-links {
     opacity: 1;
 }
 
+.link-select{
+    padding: 26px 18px 26px 18px;
+}
+
+
+
 .link-selected {
     border-bottom: 2px solid var(--yellow);
+}
+
+.link-select:hover {
+    background-color: #080505;
 }
 
 .header-links {
@@ -78,17 +88,17 @@ ul.nav-links {
     }
 }
 
-
+.dropdown-container {
+    position: relative;
+}
 .username-dropdown {
     display: none;
-        position: absolute;
-
+    position: absolute;
 }
 
-.username:hover + .username-dropdown{
+.username-dropdown:hover,
+.username:hover ~ .username-dropdown {
     display: flex;
-    position: absolute;
-    margin-top: 30px;
     padding: 15px;
     gap: 12px;
     background: var(--light-brown);
@@ -96,7 +106,6 @@ ul.nav-links {
     height: auto;
     border: 1px solid var(--yellow);
     flex-direction: column;
-    display: block;
 }
 
 
