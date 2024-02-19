@@ -28,7 +28,7 @@ class Card(models.Model):
 
     id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    category = models.CharField(max_length=20, choices=OptionsCategory.choices, default="Weapons")
+    category = models.CharField(max_length=20, choices=OptionsCategory.choices)
     name = models.CharField(max_length=30)
     rarity = models.CharField(max_length=20, choices=OptionsRarity.choices)
     image = models.BinaryField()

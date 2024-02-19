@@ -49,18 +49,8 @@ ul.nav-links {
     opacity: 1;
 }
 
-.link-select{
-    padding: 26px 18px 26px 18px;
-}
-
-
-
 .link-selected {
     border-bottom: 2px solid var(--yellow);
-}
-
-.link-select:hover {
-    background-color: #080505;
 }
 
 .header-links {
@@ -90,26 +80,35 @@ ul.nav-links {
 
 .dropdown-container {
     position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
 }
 .username-dropdown {
     display: none;
     position: absolute;
+    margin-top: 80px;
 }
 
 .username-dropdown:hover,
 .username:hover ~ .username-dropdown {
     display: flex;
-    padding: 15px;
-    gap: 12px;
-    background: var(--light-brown);
-    width: 136px;
+    min-width: 180px;
+    padding: 10px;
     height: auto;
+    background: var(--black);
     border: 1px solid var(--yellow);
     flex-direction: column;
+    z-index: 2;
 }
 
+.btn-edit-profile, .btn-logout {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
 
-.temporary-img {
-    width: 10px;
+.form-logout{
+    min-width: 180px;
 }
 

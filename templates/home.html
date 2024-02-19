@@ -3,6 +3,41 @@
 
 {% block title %}RPG Forger | Home{% endblock %}
 
+
+{% block header %}
+<!-- Se o usuário estiver autenticado -->
+{% if user_authenticated %}
+<!-- Adicione os elementos específicos para usuários autenticados aqui -->
+<!-- Por exemplo, adicione um link para o perfil do usuário e um botão de logout -->
+<li><a class="link-select li-inventory" href="/inventory">Inventory</a></li>
+<li class="dropdown-container">
+    <button class="link-select username">{{ user_name }}</button>
+    <ul class="username-dropdown">
+        <li>
+            <button type="submit" class="btn-edit-profile btn-dropdown">
+                <img class="temporary-img" src="{% static '/content/img/settings.png' %}" alt="Edit profile icon">
+                Edit profile
+            </button>
+        </li>
+        <li>
+            <form method="POST" action="{% url 'logout' %}" class="link-select form-logout">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout btn-dropdown">
+                    <img class="temporary-img" src="{% static '/content/img/logout.png' %}" alt="Logout icon">
+                    Logout
+                </button>
+            </form>
+        </li>
+    </ul>
+</li>
+{% else %}
+<!-- Se o usuário não estiver autenticado -->
+<!-- Adicione os elementos específicos para usuários não autenticados aqui -->
+<li><a class="link-select link-selected" href="/login">Log in</a></li>
+{% endif %}
+{% endblock %}
+
+
 {% block content %}
     <head>
         {{ block.super }}
@@ -15,7 +50,7 @@
 
     <main>
         <section class="section1">
-            <img src="{% static 'content/img/icon.png' %}" alt="Logo image">
+            <img src="{% static 'content/img/cards-home.png' %}" alt="Logo image">
             <h2>You can create MULTIPLE different and UNIQUE CARDS!</h2>
         </section>
         <section class="section2">
@@ -23,7 +58,7 @@
             <a class="btn-main " href="/login">CREATE ACCOUNT</a>
         </section>
         <section class="section3">
-            <img src="{% static 'content/img/sw0001.png' %}" alt="Logo image">
+            <img src="{% static 'content/img/card-home.png' %}" alt="Logo image">
             <h2>You can create MULTIPLE different and UNIQUE CARDS!</h2>
         </section>
     </main>

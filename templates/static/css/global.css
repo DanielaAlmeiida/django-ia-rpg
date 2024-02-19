@@ -1,7 +1,7 @@
 /* Variables */
 :root {
   --yellow: #FFDC82;
-  --black: #151515;
+  --black: #100909;
   --bright-yellow: #FFD15C;
   --border-yellow: #a19168;
   --dark-brown: #0E0808;
@@ -24,8 +24,13 @@ body {
     background-size: cover;
     color: var(--yellow);
     cursor: url("../content/img/cursor2.png"), auto;
-    cursor: url("../content/img/cursor2.png"), pointer;
+    cursor: url("../content/img/cursor2.png"), click;
 }
+
+button:hover, a:hover {
+    cursor: url("../content/img/hand-cursor.png"), pointer;
+}
+
 
 main {
     height: calc(100vh - 80px);
@@ -46,9 +51,9 @@ main {
 .btn-main:hover {
     color: black;
     background: linear-gradient(270deg, #C97F0F 0.01%, #EAB245 93.53%);
--webkit-box-shadow:0px 0px 12px 1px rgba(255,230,168,0.9);
--moz-box-shadow: 0px 0px 12px 1px rgba(255,230,168,0.9);
-box-shadow: 0px 0px 12px 1px rgba(255,230,168,0.9);
+    -webkit-box-shadow:0px 0px 12px 1px rgba(255,230,168,0.9);
+    -moz-box-shadow: 0px 0px 12px 1px rgba(255,230,168,0.9);
+    box-shadow: 0px 0px 12px 1px rgba(255,230,168,0.9);
 }
 
 a:hover {
@@ -98,4 +103,18 @@ input:-webkit-autofill {
 
 input:-webkit-autofill {
     -webkit-text-fill-color: var(--yellow) !important;
+}
+
+.card-username {
+    color: white;
+    font-size: 11px;
+    padding: 10px;
+}
+
+.username, .card-username {
+    text-transform: capitalize;
+}
+
+.mini-card-title h3 {
+    max-height: 1px;
 }

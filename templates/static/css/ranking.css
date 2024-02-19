@@ -40,7 +40,7 @@ section {
 
 .ranking-list-cards {
     display: flex;
-    gap: 31px;
+    gap: 48px;
     flex-wrap: wrap;
     padding: 32px;
     justify-content: center;

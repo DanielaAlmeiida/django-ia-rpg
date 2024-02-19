@@ -3,6 +3,41 @@
 
 {% block title %}RPG Forger | Ranking{% endblock %}
 
+
+{% block header %}
+<!-- Se o usuário estiver autenticado -->
+{% if user_authenticated %}
+<!-- Adicione os elementos específicos para usuários autenticados aqui -->
+<!-- Por exemplo, adicione um link para o perfil do usuário e um botão de logout -->
+<li><a class="link-select li-inventory" href="/inventory">Inventory</a></li>
+<li class="dropdown-container">
+    <button class="link-select username">{{ user_name }}</button>
+    <ul class="username-dropdown">
+        <li>
+            <button type="submit" class="btn-edit-profile btn-dropdown">
+                <img class="temporary-img" src="{% static '/content/img/settings.png' %}" alt="Edit profile icon">
+                Edit profile
+            </button>
+        </li>
+        <li>
+            <form method="POST" action="{% url 'logout' %}" class="link-select form-logout">
+                {% csrf_token %}
+                <button type="submit" class="btn-logout btn-dropdown">
+                    <img class="temporary-img" src="{% static '/content/img/logout.png' %}" alt="Logout icon">
+                    Logout
+                </button>
+            </form>
+        </li>
+    </ul>
+</li>
+{% else %}
+<!-- Se o usuário não estiver autenticado -->
+<!-- Adicione os elementos específicos para usuários não autenticados aqui -->
+<li><a class="link-select link-selected" href="/login">Log in</a></li>
+{% endif %}
+{% endblock %}
+
+
 {% block content %}
     <head>
         {{ block.super }}
@@ -13,17 +48,14 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
         $(document).ready(function () {
-            // Manipula o clique nos botões de filtro
             $('.filter-button').click(function () {
                 var filterValue = $(this).data('filter');
-
-                // Envia uma requisição AJAX para a view Django com o filtro selecionado
                 $.ajax({
-                    url: '/ranking/filter_'+ filterValue,  // Substitua pela URL da sua view Django
+                    url: '/ranking/filter_'+ filterValue,
                     type: 'GET',
                     data: {filter: filterValue},
                     success: function () {
-                        // Atualiza a lista de cards filtrados na div 'inventory-list-cards'
+
                         window.location.href = '/ranking/filter_' + filterValue;
                     },
                     error: function () {
@@ -40,7 +72,7 @@
             <h2>Ranking</h2>
             <ul class="filters">
                 <li>
-                    <button class="icon-filter filter-button power" data-filter="power"></button>
+                    <button class="icon-filter filter-button megazord" data-filter="all"></button>
                 </li>
                 <li>
                     <button class="icon-filter filter-button weapon" data-filter="weapon"></button>
@@ -52,7 +84,7 @@
                     <button class="icon-filter filter-button armor" data-filter="armor"></button>
                 </li>
                 <li>
-                    <button class="icon-filter filter-button ore" data-filter="ore"></button>
+                    <button class="icon-filter filter-button opal" data-filter="ore"></button>
                 </li>
             </ul>
         </div>

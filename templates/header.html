@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -25,59 +26,38 @@
     -->
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="{% static 'content/img/icon.png' %}" alt="Logo image">
-            <h1>RPG Forger</h1>
+<header>
+    <div class="logo">
+        <img src="{% static 'content/img/icon.png' %}" alt="Logo image">
+        <h1>RPG Forger</h1>
+    </div>
+    <div class="header-links">
+        <nav>
+            <ul class="nav-links">
+                <li><a class="link-select li-home" href="/home">Home</a></li>
+                <li><a class="link-select" href="/generate">Forge</a></li>
+                <li><a class="link-select" href="/ranking">Ranking</a></li>
+                <!-- Fazer modal EDIT PROFILE e LOGOUT-->
+                {% block header %}
+                {% endblock %}
+            </ul>
+        </nav>
+        <div class="language">
+            <ul>
+                <li class="language-item">
+                    <img src="{% static '/content/img/us.jpg' %}" alt="US Flag">
+                    <small>EN-US</small>
+                </li>
+                <li class="language-item">
+                    <img src="{% static '/content/img/br.png' %}" alt="BR Flag">
+                    <small>PT-BR</small>
+                </li>
+            </ul>
         </div>
-        <div class="header-links">
-             <nav>
-                <ul class="nav-links">
-                    <li><a class="link-select" href="/home">Home</a></li>
-                    <li><a class="link-select" href="/generate">Forge</a></li>
-                    <li><a class="link-select" href="/ranking">Ranking</a></li>
-                    <li><a class="link-select" href="/inventory">Inventory</a></li> <!-- Adicionar para usuários logados -->
-                    <li class="dropdown-container">
-                        <button class="link-select username"> Username-BR </button><!-- Adicionar para usuários logados --> <!-- Fazer modal EDIT PROFILE e LOGOUT-->
-                        <ul class="username-dropdown">
-                            <li>
-                                <img class="temporary-img" src="../static/content/img/us.jpg" alt="US Flag"> Edit profile
-                            </li>
-                            <li>
-                                <img class="temporary-img" src="../static/content/img/us.jpg" alt="US Flag"> Logout
-                            </li>
-                        </ul>
-                    </li>
+    </div>
+</header>
 
-                    <li><a class="link-select link-selected" href="/login">Log in</a></li> <!-- Retirar Login quando user está logado -->
-                    <li>
-                        <form method="POST" action="{% url 'logout' %}" class="link-select">
-                            {% csrf_token %}
-                            <button type="submit">Logout</button>
-                        </form>
-                    </li>
-                </ul>
-            </nav>
-            <div class="language">
-                <ul>
-                    <li class="language-item">
-                        <img src="../static/content/img/us.jpg" alt="US Flag">
-                        <small>EN-US</small>
-                    </li>
-                    <li class="language-item">
-                        <img src="../static/content/img/br.png" alt="BR Flag">
-                        <small>PT-BR</small>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </header>
-
-    {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 
 </body>
 </html>
-
-
-
-
