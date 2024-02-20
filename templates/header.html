@@ -7,23 +7,28 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
-
     <link rel="shortcut icon" href="{% static 'content/img/icon.png' %}">
     <title>{% block title %} {% endblock %}</title>
 
-    <!--
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
+    <!--
     <script>
-       $(document).ready(function() {
-            $('.nav-links li a').on('click', function() {
-                $('.nav-links li a').removeClass('link-selected');
+        $(document).ready(function() {
+            $(".nav-links li a").click(function() {
+                $(".nav-links li a").removeClass('link-selected');
                 $(this).addClass('link-selected');
+
+                localStorage.setItem('selectedLinkId', $(this).attr('id'));
             });
+
+            var selectedLinkId = localStorage.getItem('selectedLinkId');
+            if (selectedLinkId) {
+                $("#" + selectedLinkId).addClass('link-selected');
+            }
         });
-        }
     </script>
     -->
+
 </head>
 <body>
 <header>
@@ -37,7 +42,6 @@
                 <li><a class="link-select li-home" href="/home">Home</a></li>
                 <li><a class="link-select" href="/generate">Forge</a></li>
                 <li><a class="link-select" href="/ranking">Ranking</a></li>
-                <!-- Fazer modal EDIT PROFILE e LOGOUT-->
                 {% block header %}
                 {% endblock %}
             </ul>

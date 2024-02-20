@@ -106,19 +106,66 @@ h2 {
     background-image: url("../content/img/armor.png");
 }
 
-.opal {
-    background-image: url("../content/img-ores/ore-Opal.png");
-}
-
 .star {
     background-image: url("../content/img/star.png");
 }
-
 
 .inventory-body {
     display: flex;
     flex-direction: row;
 }
+
+
+/* Dropdown */
+.filter-bronze {
+    background-image: url("../content/img-ores/ore-Bronze.png");
+}
+.filter-silver {
+    background-image: url("../content/img-ores/ore-Silver.png");
+}
+.filter-gold {
+    background-image: url("../content/img-ores/ore-Gold.png");
+}
+.filter-emerald {
+    background-image: url("../content/img-ores/ore-Emerald.png");
+}
+.filter-diamond {
+    background-image: url("../content/img-ores/ore-Diamond.png");
+}
+.filter-ruby {
+    background-image: url("../content/img-ores/ore-Ruby.png");
+}
+.filter-obsidian {
+    background-image: url("../content/img-ores/ore-Obsidian.png");
+}
+.filter-opal, .filter-ore {
+    background-image: url("../content/img-ores/ore-Opal.png");
+}
+
+.dropdown-rarity {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 5;
+}
+.ul-dropdown-rarity {
+    display: none;
+    position: absolute;
+    bottom: 62px;
+    gap: 0px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-flow: row-reverse;
+}
+
+.ul-dropdown-rarity:hover,
+.filter-ore:hover ~ .ul-dropdown-rarity {
+    display: grid;
+    height: auto;
+    background: var(--black);
+    z-index: 2;
+}
+/* Fim Dropdown*/
 
 .inventory-cards {
     width: 100%;

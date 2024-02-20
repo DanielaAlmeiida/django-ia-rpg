@@ -17,4 +17,12 @@ urlpatterns = [
     path('inventory/filter_weapon/', views.inventory, {'category': 'Weapons'}, name='filter_weapons'),
     path('inventory/filter_potion/', views.inventory, {'category': 'Potions'}, name='filter_potions'),
     path('inventory/filter_armor/', views.inventory, {'category': 'Armors'}, name='filter_armors'),
+    path('inventory/filter_bronze/', views.inventory, {'category': 'Bronze'}, name='filter_bronze'),
+    path('inventory/filter_silver/', views.inventory, {'category': 'Silver'}, name='filter_silver'),
+    path('inventory/filter_gold/', views.inventory, {'category': 'Gold'}, name='filter_gold'),
+    path('inventory/filter_emerald/', views.inventory, {'category': 'Emerald'}, name='filter_emerald'),
+    path('inventory/filter_diamond/', views.inventory, {'category': 'Diamond'}, name='filter_diamond'),
+    path('inventory/filter_ruby/', views.inventory, {'category': 'Ruby'}, name='filter_ruby'),
+    path('inventory/filter_obsidian/', views.inventory, {'category': 'Obsidian'}, name='filter_obsidian'),
+    path('inventory/filter_opal/', views.inventory, {'category': 'Opal'}, name='filter_opal'),
 ]

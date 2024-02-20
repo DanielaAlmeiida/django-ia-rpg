@@ -135,6 +135,12 @@ def generate_image(request):
                 f"Give a brief description of a {color} potion"
                 f"named {card_name} imbued with an effect of {type}."
                 f"\nShort description entered by the user (optional): '{card_description}'")
+        elif category == 'Armors':
+            armor_material = request.POST.get('armor-material')
+            prompt = (
+                f"Give a brief description of a {color} {type} armor"
+                f"named {card_name} forged with an material of {armor_material}."
+                f"\nShort description entered by the user (optional): '{card_description}'")
 
 
         response_text = client.chat.completions.create(
@@ -153,7 +159,7 @@ def generate_image(request):
             "prompt": final_prompt,
             "negative_prompt": "drawing, painting, crayon, sketch, graphite, impressionist, noisy, blurry, soft, "
                                "deformed, ugly. young. long neck. (cross eyed:1.5). multiple characters, character, "
-                               "person, Letters, names, words, Human being, doll",
+                               "person, Letters, names, words, Human being, doll, face, nose, eyes",
             "samples": 1,
             "scheduler": "Euler a",
             "num_inference_steps": 25,
@@ -238,6 +244,8 @@ def filter_cards_by_category(request):
         return filter_cards_by_category(request, 'Potions')
     elif filter_value == 'armor':
         return filter_cards_by_category(request, 'Armors')
+    elif filter_value != 'all':
+        return filter_cards_by_category(request, filter_value)
     else:
         return filter_cards_by_category(request, 'all')
 
@@ -247,8 +255,10 @@ def inventory(request, category):
     user = User.objects.get(pk=request.user.id)
     if category == 'all':
         cards = Card.objects.filter(user=user).order_by('power').reverse()
-    else:
+    elif category in ['Armors', 'Weapons', 'Potions']:
         cards = Card.objects.filter(user=user, category=category).order_by('power').reverse()
+    else:
+        cards = Card.objects.filter(user=user, rarity=category).order_by('power').reverse()
 
     best_card = Card.objects.filter(user=user).order_by('power').reverse().first()
     status = Status.objects.filter(card=best_card)

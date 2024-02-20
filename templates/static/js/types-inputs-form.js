@@ -18,18 +18,18 @@ $(document).ready(function () {
                 </select>
                 <select id="weapon-element" name="weapon-element" required>
                     <option value="" class="option-disabled" disabled selected hidden>Select an element</option>
-                    <option value="lightning">Lightning</option>
-                    <option value="thunder">Thunder</option>
-                    <option value="poison">Poison</option>
-                    <option value="ice">Ice</option>
-                    <option value="fire">Fire</option>
-                    <option value="divine">Divine</option>
-                    <option value="magic">Magic</option>
-                    <option value="shadows">Shadows</option>
-                    <option value="rainbow">Rainbow</option>
-                    <option value="plasma">Plasma</option>
-                    <option value="arcane">Arcane</option>
-                    <option value="storm">Storm</option>
+                    <option value="LIGHTNING">Lightning</option>
+                    <option value="THUNDER">Thunder</option>
+                    <option value="POISON">Poison</option>
+                    <option value="ICE">Ice</option>
+                    <option value="FIRE">Fire</option>
+                    <option value="DIVINE">Divine</option>
+                    <option value="MAGIC">Magic</option>
+                    <option value="SHADOWS">Shadows</option>
+                    <option value="RAINBOW">Rainbow</option>
+                    <option value="PLASMA">Plasma</option>
+                    <option value="ARCANE">Arcane</option>
+                    <option value="STORM">Storm</option>
                 </select>
             `);
         } else if (category === "Potions") {
@@ -39,16 +39,33 @@ $(document).ready(function () {
                     <option value="HEAL">Heal</option>
                     <option value="POISON">Poison</option>
                     <option value="INVISIBILITY">Invisibility</option>
-                    <option value="SPEED">Speed</option>
+                    <option value="STRENGTH">Strength</option>
+                    <option value="RESISTANCE">Resistance</option>
+                    <option value="LUCKY">Lucky</option>
+                    <option value="WEAKNESS">Weakness</option>
+                    <option value="SLOWNESS">Slowness</option>
+                    <option value="FIRE">Fire</option>
+                    <option value="REGENERATION">Regenaration</option>
+                    <option value="DARKNESS">Darkness</option>
                 </select>
             `);
         } else if (category === "Armors") {
             dynamicSelects.append(`
-                <select id="first-characteristic" name="first-characteristic" required>
-                    <option value="" class="option-disabled" disabled selected hidden>Select your armor type</option>
-                    <option value="HEAVY">Heavy Armor</option>
-                    <option value="LIGHT">Light Armor</option>
-                    <option value="MAGIC">Magic Armor</option>
+                <select id="type" name="type" required>
+                    <option value="" class="option-disabled" disabled selected hidden>Armor type</option>
+                    <option value="HELMET">Helmet</option>
+                    <option value="CHESTPLATE">Chestplate</option>
+                    <option value="ARMS">Arms</option>
+                    <option value="LEGGINGS">Leggings</option>
+                    <option value="BOOTS">Boots</option>
+                </select>
+                <select id="armor-material" name="armor-material" required>
+                    <option value="" class="option-disabled" disabled selected hidden>Armor material</option>
+                    <option value="CLOTH">Cloth</option>
+                    <option value="LEATHER">Leather</option>
+                    <option value="CHAINMAIL">Chainmail</option>
+                    <option value="IRON">Iron</option>
+                    <option value="CRYSTAL">Crystal</option>
                 </select>
             `);
         }

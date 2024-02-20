@@ -51,6 +51,7 @@ ul.nav-links {
 
 .link-selected {
     border-bottom: 2px solid var(--yellow);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .header-links {
