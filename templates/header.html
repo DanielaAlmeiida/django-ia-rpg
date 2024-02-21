@@ -8,8 +8,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}">
     <link rel="shortcut icon" href="{% static 'content/img/icon.png' %}">
+    <script src="https://kit.fontawesome.com/0f24489fe8.js" crossorigin="anonymous"></script>
     <title>{% block title %} {% endblock %}</title>
 
+    <meta name="viewport" content="width=device-width">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <!--
     <script>
@@ -29,14 +31,36 @@
     </script>
     -->
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var dropdown = document.querySelector('.header-dropdown');
+            var dropdownList = document.querySelector('.dropdown-header-links');
+
+            dropdown.addEventListener('click', function () {
+                dropdownList.classList.toggle('show');
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdownList.classList.remove('show');
+                }
+            });
+        });
+
+    </script>
 </head>
 <body>
-<header>
+<header class="header-dropdown">
+    <button class="btn-dropdown-header">
+        <i class="fa-solid fa-bars" style="color: #ffdc82;"></i>
+        Menu
+    </button>
+
     <div class="logo">
         <img src="{% static 'content/img/icon.png' %}" alt="Logo image">
         <h1>RPG Forger</h1>
     </div>
-    <div class="header-links">
+    <div class="header-links dropdown-header-links">
         <nav>
             <ul class="nav-links">
                 <li><a class="link-select li-home" href="/home">Home</a></li>
@@ -46,18 +70,18 @@
                 {% endblock %}
             </ul>
         </nav>
-        <div class="language">
-            <ul>
-                <li class="language-item">
-                    <img src="{% static '/content/img/us.jpg' %}" alt="US Flag">
-                    <small>EN-US</small>
-                </li>
-                <li class="language-item">
-                    <img src="{% static '/content/img/br.png' %}" alt="BR Flag">
-                    <small>PT-BR</small>
-                </li>
-            </ul>
-        </div>
+    </div>
+    <div class="language">
+        <ul>
+            <li class="language-item">
+                <img src="{% static '/content/img/us.jpg' %}" alt="US Flag">
+                <small>EN-US</small>
+            </li>
+            <li class="language-item">
+                <img src="{% static '/content/img/br.png' %}" alt="BR Flag">
+                <small>PT-BR</small>
+            </li>
+        </ul>
     </div>
 </header>
 

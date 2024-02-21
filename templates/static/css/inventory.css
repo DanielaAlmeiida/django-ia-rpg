@@ -152,6 +152,7 @@ h2 {
 .ul-dropdown-rarity {
     display: none;
     position: absolute;
+    right: 0;
     bottom: 62px;
     gap: 0px;
     grid-template-columns: repeat(4, 1fr);

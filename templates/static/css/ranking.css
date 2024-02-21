@@ -6,7 +6,7 @@ main > div {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 30px;
     background: var(--light-brown);
     gap: 20px;
@@ -34,8 +34,8 @@ section {
 
 .ranking-best-cards {
     display: flex;
-    align-items: flex-end;
     gap: 45px;
+        align-items: flex-end;
 }
 
 .ranking-list-cards {
@@ -49,3 +49,48 @@ section {
 .crown {
     height: 70px;
 }
+
+
+/* DROPDOWN */
+.dropdown-rarity {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 5;
+}
+.ul-dropdown-rarity {
+    display: none;
+    position: absolute;
+    top: 62px;
+    gap: 0px;
+    grid-template-columns: repeat(1, 1fr);
+    grid-auto-flow: row-reverse;
+}
+
+.ul-dropdown-rarity:hover,
+.filter-ore:hover ~ .ul-dropdown-rarity {
+    display: grid;
+    height: auto;
+    background: var(--black);
+    z-index: 2;
+}
+/* Fim Dropdown*/
+
+ul.filters {
+    gap: 0px;
+}
+
+@media (max-width: 1100px) {
+    .ranking-best-cards {
+        display: flex;
+        align-items: center;
+        gap: 45px;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .status-list-generated {
+        display: none !important;
+    }
+}
+

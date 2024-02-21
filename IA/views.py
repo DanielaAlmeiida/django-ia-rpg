@@ -298,8 +298,10 @@ def inventory(request, category):
 def ranking(request, category):
     if category == 'all':
         cards = Card.objects.all().order_by('power').reverse()
-    else:
+    elif category in ['Armors', 'Weapons', 'Potions']:
         cards = Card.objects.filter(category=category).order_by('power').reverse()
+    else:
+        cards = Card.objects.filter(rarity=category).order_by('power').reverse()
 
     card_data = []
     for card in cards:

@@ -41,10 +41,10 @@
 {% block content %}
     <head>
         {{ block.super }}
-        <link rel="stylesheet" type="text/css" href="{% static 'css/ranking.css' %}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/card-style.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/inventory.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/card-style.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/big-card-template.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/ranking.css' %}">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
         $(document).ready(function () {
@@ -83,8 +83,35 @@
                 <li>
                     <button class="icon-filter filter-button armor" data-filter="armor"></button>
                 </li>
-                <li>
-                    <button class="icon-filter filter-button opal" data-filter="ore"></button>
+                <li class="dropdown-rarity">
+                    <button class="icon-filter filter-button filter-ore" data-filter="all"></button>
+
+                    <ul class="ul-dropdown-rarity">
+                        <li>
+                            <button class="icon-filter filter-button filter-bronze" data-filter="bronze"></button>
+                        </li>
+                        <li>
+                            <button class="icon-filter filter-button filter-silver" data-filter="silver"></button>
+                        </li>
+                        <li>
+                            <button class="icon-filter filter-button filter-gold" data-filter="gold"></button>
+                        </li>
+                        <li>
+                            <button class="icon-filter filter-button filter-emerald" data-filter="emerald"></button>
+                        </li>
+                        <li>
+                            <button class="icon-filter filter-button filter-diamond" data-filter="diamond"></button>
+                        </li>
+                        <li>
+                            <button class="icon-filter filter-button filter-ruby" data-filter="ruby"></button>
+                        </li>
+                        <li>
+                            <button class="icon-filter filter-button filter-obsidian" data-filter="obsidian"></button>
+                        </li>
+                        <li>
+                            <button class="icon-filter filter-button filter-opal" data-filter="opal"></button>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
