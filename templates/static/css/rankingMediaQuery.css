@@ -1,0 +1,98 @@
+@media (max-width: 1100px) {
+    .ranking-best-cards {
+        display: flex;
+        align-items: center;
+        gap: 45px;
+        justify-content: center;
+    }
+    .status-list-generated {
+        display: none !important;
+    }
+    .crown {
+        height: 48px;
+    }
+    .card-type-id {
+        font-size: smaller;
+    }
+    .power-number {
+        font-size: 16px;
+    }
+    .card-footer {
+        align-items: center;
+    }
+
+    /* SECOND CARD */
+    .second-card .card-background {
+        width: 222px;
+        height: 369px;
+    }
+    .second-card .card {
+        width: 206px;
+        height: 352px;
+    }
+    .second-card .card-header {
+        font-size: small;
+    }
+    .second-card .generated-img, .second-card .card-img {
+        width: 205px;
+        height: auto;
+    }
+    .second-card .card-footer {
+        gap: 8px;
+        align-items: center;
+    }
+    .second-card .card-header {
+        padding: 10px 8px 10px 8px;
+    }
+
+    /* FIRST CARD */
+    .first-card .card-background {
+        width: 273px;
+        height: 447px;
+    }
+    .first-card .card {
+        width: 257px;
+        height: 430px;
+    }
+    .first-card .card-header {
+        font-size: small;
+    }
+    .first-card .generated-img, .first-card .card-img {
+        width: 328px;
+        height: auto;
+    }
+    .first-card .generated-img, .first-card .card-img {
+        width: 255px;
+        height: auto;
+    }
+    .first-card .card-footer {
+        gap: 17px ;
+    }
+
+    /* THIRD CARD */
+    .third-card .card-background {
+        width: 200px;
+        height: 339px;
+    }
+    .third-card .card {
+        width: 189px;
+        height: 325px;
+    }
+    .third-card .card-header {
+        font-size: smaller;
+    }
+    .third-card .generated-img, .third-card .card-img {
+        width: 188px;
+        height: auto;
+    }
+    .third-card .card-footer {
+        gap: 7px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 850px) {
+    .ranking-best-cards {
+        flex-direction: column;
+    }
+}

@@ -9,6 +9,7 @@ header {
 
 .logo > h1 {
     font-size: 30px;
+    line-height: 1;
 }
 
 a {
@@ -37,6 +38,10 @@ div.language ul {
 
 div.language, .logo, a {
     padding: 26px;
+}
+div.language {
+    display: flex;
+    gap: 20px;
 }
 
 ul.nav-links {
@@ -92,6 +97,10 @@ ul.nav-links {
     z-index: 10;
 }
 
+.username {
+    background: none;
+}
+
 .btn-edit-profile, .btn-logout {
     display: flex;
     gap: 8px;
@@ -131,7 +140,7 @@ ul.nav-links {
     .dropdown-header-links {
         display: none;
         position: absolute;
-        gap: 0px;
+        gap: 0;
         grid-template-columns: repeat(4, 1fr);
         grid-auto-flow: row-reverse;
         background: var(--black);
@@ -159,20 +168,17 @@ ul.nav-links {
     a:hover {
         background: rgba(255, 255, 255, 0);
     }
-    .nav-links li{
-        padding: 20px;
-    }
     .link-selected {
-        border-bottom: 0px solid var(--yellow);
+        border-bottom: 0 solid var(--yellow);
         background: rgba(255, 255, 255, 0);
     }
     .nav-links li {
-        padding: 20px;
+        padding: 20px 30px 20px 30px;
         width: 74%;
         text-align: center;
     }
     ul {
-        gap: 0px;
+        gap: 0;
     }
     .btn-dropdown-header {
         display: flex;
@@ -181,35 +187,50 @@ ul.nav-links {
         background: var(--light-brown);
         margin-left: 27px;
     }
-    .username-dropdown {
-        margin-top: -27px;
-        margin-left: 410px;
-    }
     .nav-links > .dropdown-container {
-        padding: 20px;
+        padding: 0;
         width: 74%;
         text-align: center;
         justify-content: center;
     }
     .username-dropdown:hover,
     .username:hover ~ .username-dropdown {
-        margin-left: 372px;
-        width: 202px;
-        top: 21px;
-        padding: 0px;
+        left: 118px;
+        width: 180px;
+        top: 10px;
+        padding: 0;
+        display: flex;
+        margin: 0;
     }
     .username, .card-username {
+        display: flex;
         text-transform: capitalize;
+        width: 132px;
+        padding: 15px 60px 15px 60px;
+        justify-content: center;
     }
     .dropdown-container > .nav-links li {
         padding: -13px;
         margin: -14px;
     }
     .username-dropdown > li {
-        padding: 13px;
+        padding: 0;
     }
-    .btn-edit-profile {
-        width: 153px;
+    .btn-edit-profile, .btn-logout {
+        width: 175px;
+        font-size: 16px;
+    }
+
+    a {
+        padding: 0;
+    }
+    .temporary-img {
+        width: 25px;
+        height: auto;
+    }
+    div.language {
+        padding: 26px;
+        gap: 10px;
     }
 }
 

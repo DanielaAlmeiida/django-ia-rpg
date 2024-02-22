@@ -81,16 +81,8 @@ ul.filters {
     gap: 0px;
 }
 
-@media (max-width: 1100px) {
-    .ranking-best-cards {
-        display: flex;
-        align-items: center;
-        gap: 45px;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .status-list-generated {
-        display: none !important;
-    }
+.ranking-list {
+    min-height: 100vh;
 }
+
 
