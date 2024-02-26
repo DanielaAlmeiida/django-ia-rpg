@@ -1,4 +1,4 @@
-# RPG Forger
+# RPG Forger 🚀
 This project is an RPG card generator that connects to two APIs: Segmind and OpenAI.
 
 The generated cards are divided into 3 categories: Weapon, Potion, and Armor. Each 
@@ -13,13 +13,10 @@ category has various different types, capable of generating a variety of unique 
 ### Screenshot: Ranking Cards
 ![Card Forging Screen](README/Ranking.png)
 
-### Video
-![Card Forging Screen](README/videoRPG.mp4)
-
 ### Video:
 https://github.com/DanielaAlmeiida/django-ia-rpg/assets/104696916/8b29dabc-02a4-48ab-9722-dcf0a58199fd
 
-## Dependências do Projeto
+## Dependências do Projeto 🛠️
 ```
 annotated-types==0.6.0
 anyio==4.2.0
@@ -46,7 +43,7 @@ tqdm==4.66.1
 typing_extensions==4.9
 ```
 
-# Comandos para execução do projeto
+# Comandos para execução do projeto ⚙️
 ```commandline
 python manage.py runserver
 ```

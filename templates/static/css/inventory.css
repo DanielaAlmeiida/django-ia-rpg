@@ -251,3 +251,6 @@ li.mini-card {
   border: 3px solid var(--light-brown);  /* creates padding around scroll thumb */
 }
 
+.card-counter {
+    display:none;
+}

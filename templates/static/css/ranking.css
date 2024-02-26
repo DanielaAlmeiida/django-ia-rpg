@@ -85,4 +85,6 @@ ul.filters {
     min-height: 100vh;
 }
 
-
+.card-counter {
+    display: block;
+}
