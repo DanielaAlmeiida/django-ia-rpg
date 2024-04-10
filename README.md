@@ -14,7 +14,8 @@ category has various different types, capable of generating a variety of unique 
 ![Card Forging Screen](README/Ranking.png)
 
 ### Video:
-https://github.com/DanielaAlmeiida/django-ia-rpg/assets/104696916/8b29dabc-02a4-48ab-9722-dcf0a58199fd
+https://github.com/DanielaAlmeiida/django-ia-rpg/assets/104696916/31be5710-cf77-4b69-b64c-9d374b159e66
+
 
 ## Dependências do Projeto 🛠️
 ```
